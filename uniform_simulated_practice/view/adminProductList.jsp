@@ -42,6 +42,6 @@
 	<br>
 
 	<hr align="center" size="5" color="blue" width="950"></hr>
-	<jsp:include page="/common/footer.jsp" flush="true" />
+
 </body>
 </html>
