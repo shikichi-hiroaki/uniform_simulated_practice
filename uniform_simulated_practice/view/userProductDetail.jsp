@@ -28,19 +28,19 @@
 				<td>[在庫数]</td>
 			</tr>
 		</table>
+		<br> <br> <br>
 		<table align="center">
-			<tr>
-				<td width="220" align="center"><a
-					href="<%=request.getContextPath()%>">商品一覧</a></td>
+
+			<tr width="220" align="center">
+				<td><a href="<%=request.getContextPath()%>">商品一覧</a></td>
 			</tr>
-			<tr>
-				<td width="220" align="center"><a
-					href="<%=request.getContextPath()%>">商品更新</a></td>
+			<tr width="220" align="center">
+				<td><a href="<%=request.getContextPath()%>">商品更新</a></td>
 			</tr>
-			<tr>
-				<td width="220" align="center"><a
-					href="<%=request.getContextPath()%>">商品削除</a></td>
+			<tr width="220" align="center">
+				<td><a href="<%=request.getContextPath()%>">商品削除</a></td>
 			</tr>
-			</div>
+		</table>
+	</div>
 </body>
 </html>
