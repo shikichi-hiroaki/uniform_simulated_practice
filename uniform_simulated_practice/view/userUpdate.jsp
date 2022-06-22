@@ -4,11 +4,11 @@
 
 <html>
 	<head>
-		<title>会員登録画面</title>
+		<title>会員情報更新</title>
 	</head>
 	<body>
 		<div style="text-align:center">
-			<%@include file="/common/header.jsp" %>
+			<%@include file="/common/userHeader.jsp" %>
 			<!-- 会員情報入力 -->
 			<br>
 			<br>

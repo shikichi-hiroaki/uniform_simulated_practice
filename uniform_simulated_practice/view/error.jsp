@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div style="text-align:center">
-			<%@include file="/common/header.jsp"%>
+			<%@include file="/common/userHeader.jsp"%>
 			<p><font size="4">[エラーメッセージ]</font></p>
 
 

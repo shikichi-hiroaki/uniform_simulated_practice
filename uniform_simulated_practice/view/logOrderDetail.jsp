@@ -6,8 +6,7 @@
 </head>
 <body>
 	<div style="text-align: center">
-		<h1 align="center">受注管理システム</h1>
-		<hr align="center" size="5" color="sky blue" width="950" />
+		<%@ include file="/common/userHeader.jsp"%>
 
 		<!-- メッセージ表示 -->
 		<h2>過去の注文詳細</h2>

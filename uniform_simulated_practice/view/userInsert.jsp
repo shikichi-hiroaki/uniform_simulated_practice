@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div style="text-align:center">
-			<%@include file="/common/header.jsp" %>
+			<%@include file="/common/userHeader.jsp" %>
 			<!-- 会員情報入力 -->
 			<br>
 			<br>

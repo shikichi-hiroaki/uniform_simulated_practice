@@ -8,7 +8,7 @@
 		<div style="text-align:center">
 		<br>
 		<br>
-			<%@include file="/common/header.jsp" %>
+			<%@include file="/common/userHeader.jsp" %>
 			<h2>ユーザーメニュー</h2>
 			<hr style="width: 950; color: black; size: 2" />
 			<a href="<%=request.getContextPath()%>/リンク">商品一覧</a>

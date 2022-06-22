@@ -9,7 +9,7 @@
 
 	<body>
 		<div style="text-align:center">
-			<%@include file="/common/header.jsp" %>
+			<%@include file="/common/adminHeader.jsp" %>
 			<h2>メニュー</h2>
 			<hr style="width: 950; color: black; size: 2" />
 

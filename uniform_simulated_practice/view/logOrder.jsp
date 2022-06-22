@@ -3,11 +3,11 @@
 
 <html>
 	<head>
-		<title>会員登録画面</title>
+		<title>過去の注文履歴</title>
 	</head>
 	<body>
 		<div style="text-align:center">
-			<%@include file="/common/header.jsp" %>
+			<%@include file="/common/userHeader.jsp" %>
 			<!-- 過去の注文状況一覧画面 -->
 			<h2>過去の注文履歴</h2>
 			<hr color="black" width="950" size="3"/>

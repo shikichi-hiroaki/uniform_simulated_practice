@@ -1,6 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <html>
-<jsp:include page="/common/header.jsp" flush="true" />
+<head>
+		<title>商品一覧(共通)</title>
+	</head>
+<jsp:include page="/common/userHeader.jsp" flush="true" />
 <body>
 	<table align="center" width="850">
 		<tr>

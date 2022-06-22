@@ -6,17 +6,29 @@
 </head>
 <body>
 	<div style="text-align: center">
-		<h1 align="center">受注管理システム</h1>
-		<hr align="center" size="5" color="sky blue" width="950" />
+<%@ include file="/common/userHeader.jsp"%>
 
 		<!-- メッセージ表示 -->
 		<h2>商品購入</h2>
 
 		<!-- 注文内容を表示 -->
 		<table align="center">
+
+			<tr>
+				<th style="background-color: skyblue; text-align: center">ユーザーID</th>
+				<th>[ログインした場合、IDを表示]<th>
+			</tr>
 			<tr>
 				<th style="background-color: skyblue; text-align: center">氏名</th>
 				<td><input type="text" name="name" value=""></td>
+			</tr>
+			<tr>
+				<th style="background-color: skyblue; text-align: center">電話番号</th>
+				<td><input type="text" name="denwa" value=""></td>
+			</tr>
+			<tr>
+				<th style="background-color: skyblue; text-align: center">住所</th>
+				<td><textarea name="adress" rows="2" cols="50"></textarea></td>
 			</tr>
 			<tr>
 				<th style="background-color: skyblue; text-align: center">mail</th>
@@ -42,9 +54,9 @@
 			</tr>
 		</table>
 		<br> <br> <br> <a
-			href="<%=request.getContextPath()%><td width="220" align="center">購入確認</a></td><br>
+			href="<%=request.getContextPath()%>"></a><td width="220" align="center">購入確認</a></td><br>
 			 <a
-			href="<%=request.getContextPath()%><td width="220" align="center">商品一覧画面へ戻る</a></td><br>
+			href="<%=request.getContextPath()%>"></a><td width="220" align="center">商品一覧画面へ戻る</a></td><br>
 		</div>
 	</body>
 </html>

@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div style="text-align:center">
-			<%@include file="/common/header.jsp" %>
+			<%@include file="/common/adminHeader.jsp"%>
 			<h3>受注管理一覧</h3>
 			<hr style="width:950 ; color:black ; size:2 "/>
 

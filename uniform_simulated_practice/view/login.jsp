@@ -7,7 +7,7 @@
 
 	<body>
 		<div style="text-align:center">
-		<%@include file="/common/header.jsp" %>
+		<%@include file="/common/userHeader.jsp" %>
 			<form action="<%=request.getContextPath()%>/login" method="POST">
 			<br>
 			<br>

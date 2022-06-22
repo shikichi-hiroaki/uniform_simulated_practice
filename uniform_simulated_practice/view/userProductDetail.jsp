@@ -2,12 +2,11 @@
 
 <html>
 <head>
-<title>商品詳細</title>
+<title>商品詳細(顧客)</title>
 </head>
 <body>
 	<div style="text-align: center">
-		<h1 align="center">受注管理システム</h1>
-		<hr align="center" size="5" color="sky blue" width="950" />
+		<%@include file="/common/userHeader.jsp" %>
 
 		<!-- メッセージ表示 -->
 		<h2>商品詳細</h2>
@@ -33,12 +32,6 @@
 
 			<tr width="220" align="center">
 				<td><a href="<%=request.getContextPath()%>">商品一覧</a></td>
-			</tr>
-			<tr width="220" align="center">
-				<td><a href="<%=request.getContextPath()%>">商品更新</a></td>
-			</tr>
-			<tr width="220" align="center">
-				<td><a href="<%=request.getContextPath()%>">商品削除</a></td>
 			</tr>
 		</table>
 	</div>
