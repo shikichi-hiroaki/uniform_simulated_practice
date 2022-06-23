@@ -2,13 +2,13 @@ package bean;
 
 public class User {
 
-	private String user_id;
-	private String user_name;
-	private String mail_adress;
-	private String place;
-	private String phone_number;
-	private String password;
-	private int authority;
+	private String user_id;//ユーザーID
+	private String user_name;//ユーザー名
+	private String mail_adress;//メールアドレス
+	private String place;//住所
+	private String phone_number;//電話番号
+	private String password;//パスワード
+	private int authority;//権限
 
 	public User() {
 		user_id = null;

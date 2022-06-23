@@ -2,18 +2,18 @@ package bean;
 
 public class Product {
 
-	private int product_id;
-	private String product_name;
-	private int price;
-	private int exist_product;
-	private String image;
+	private int product_id;//商品ID
+	private String product_name;//商品名
+	private int price;//価格
+	private int exist_products;//在庫数
+	private String image;//画像
 
 	public Product(){
 
 		this.product_id=0;
 		this.product_name=null;
 		this.price=0;
-		this.exist_product=0;
+		this.exist_products=0;
 		this.image=null;
 	}
 
@@ -29,8 +29,8 @@ public class Product {
 		this.price=price;
 	}
 
-	public void setExist_product(int exist_product) {
-		this.exist_product=exist_product;
+	public void setExist_products(int exist_products) {
+		this.exist_products=exist_products;
 	}
 
 	public void setImage(String image) {
@@ -53,9 +53,9 @@ public class Product {
 		return this.price;
 	}
 
-	public int getExist_product() {
+	public int getExist_products() {
 
-		return this.exist_product;
+		return this.exist_products;
 	}
 
 	public String getImage() {

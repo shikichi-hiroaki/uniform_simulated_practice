@@ -3,7 +3,7 @@ package bean;
 public class Purchase {
 
 	// フィールド変数
-	private String purchase_id; // 購入ID
+	private int purchase_id; // 購入ID
 	private String user_id; // ユーザーID
 	private String user_name; //ユーザー名
 	private String product_id; // 商品ID
@@ -20,7 +20,7 @@ public class Purchase {
 	// コンストラクタ
 	public Purchase() {
 
-		this.purchase_id = null;
+		this.purchase_id = 0;
 		this.user_id = null;
 		this.user_name = null;
 		this.product_id = null;
@@ -37,7 +37,7 @@ public class Purchase {
 	}
 
 	// setメソッド
-	public void setPurchase_id(String purchase_id) {
+	public void setPurchase_id(int purchase_id) {
 		this.purchase_id = purchase_id;
 	}
 
@@ -87,7 +87,7 @@ public class Purchase {
 	}
 
 	// getメソッド
-	public String getPurchase_id() {
+	public int getPurchase_id() {
 		return purchase_id;
 	}
 

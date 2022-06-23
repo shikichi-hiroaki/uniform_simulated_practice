@@ -38,7 +38,7 @@ public class PurchaseDAO {
 
 			while (rs.next()) {
 				Purchase purchase = new Purchase();
-				purchase.setPurchase_id(rs.getString("purchase_id"));
+				purchase.setPurchase_id(rs.getInt("purchase_id"));
 				purchase.setUser_id(rs.getString("user_id"));
 				purchase.setUser_name(rs.getString("user_name"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
@@ -127,7 +127,7 @@ public class PurchaseDAO {
 			ResultSet rs = smt.executeQuery(sql);
 
 			while (rs.next()) {
-				purchase.setPurchase_id(rs.getString("purchase_id"));
+				purchase.setPurchase_id(rs.getInt("purchase_id"));
 				purchase.setUser_id(rs.getString("user_id"));
 				purchase.setUser_name(rs.getString("user_name"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
@@ -178,7 +178,7 @@ public class PurchaseDAO {
 			ResultSet rs = smt.executeQuery(sql);
 
 			while (rs.next()) {
-				purchase.setPurchase_id(rs.getString("purchase_id"));
+				purchase.setPurchase_id(rs.getInt("purchase_id"));
 				purchase.setUser_id(rs.getString("user_id"));
 				purchase.setUser_name(rs.getString("user_name"));
 				purchase.setMail_adress(rs.getString("mail_adress"));

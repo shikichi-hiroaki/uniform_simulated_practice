@@ -76,7 +76,7 @@ public class UserDAO {
 	public User selectByUser(String user_id, String password) {
 
 		User user = new User();
-		String sql = "SELECT * FROM userinfo WHERE user ='" + user_id + "' AND password='" + password + "'";
+		String sql = "SELECT * FROM user WHERE user ='" + user_id + "' AND password='" + password + "'";
 
 		Connection con = null;
 		Statement smt = null;

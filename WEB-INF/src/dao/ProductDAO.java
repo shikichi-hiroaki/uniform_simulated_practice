@@ -40,7 +40,7 @@ public class ProductDAO {
 				product.setProduct_id((rs.getInt("product_id")));
 				product.setProduct_name((rs.getString("product_name")));
 				product.setPrice((rs.getInt("price")));
-				product.setExist_product((rs.getInt("exist_product")));
+				product.setExist_products((rs.getInt("exist_products")));
 				product.setImage((rs.getString("image")));
 				productList.add(product);
 			}
@@ -72,7 +72,7 @@ public class ProductDAO {
 			con = getConnection();
 			smt = con.createStatement();
 			String sql = "INSERT INTO product VALUES(null,'" +  product.getProduct_name() + "',"
-					+  product.getPrice() + ", " + product.getExist_product() + ", '" + product.getImage() + "')";
+					+  product.getPrice() + ", " + product.getExist_products() + ", '" + product.getImage() + "')";
 			smt.executeUpdate(sql);
 
 		} catch (Exception e) {
@@ -102,7 +102,7 @@ public class ProductDAO {
 			String sql = "UPDATE product SET "
 						+ "product_name='" + product.getProduct_name() + "',"
 						+ "price=" + product.getPrice() + ","
-						+ "exist_products=" + product.getExist_product() + ","
+						+ "exist_products=" + product.getExist_products() + ","
 						+ "image='" + product.getImage() + "' "
 						+ "where product_id=" + product.getProduct_id();
 			smt.executeUpdate(sql);
@@ -144,7 +144,7 @@ public class ProductDAO {
 				product.setProduct_id(rs.getInt("product_id"));
 				product.setProduct_name(rs.getString("product_name"));
 				product.setPrice(rs.getInt("price"));
-				product.setExist_product(rs.getInt("exist_products"));
+				product.setExist_products(rs.getInt("exist_products"));
 				product.setImage(rs.getString("image"));
 			}
 
