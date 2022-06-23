@@ -17,48 +17,48 @@ public class Product {
 		this.image=null;
 	}
 
-	public void Product_id(int product_id) {
+	public void setProduct_id(int product_id) {
 		this.product_id=product_id;
 	}
 
-	public void Product_name(String product_name) {
+	public void setProduct_name(String product_name) {
 		this.product_name=product_name;
 	}
 
-	public void price(int price) {
+	public void setPrice(int price) {
 		this.price=price;
 	}
 
-	public void exist_product(int exist_product) {
+	public void setExist_product(int exist_product) {
 		this.exist_product=exist_product;
 	}
 
-	public void image(String image) {
+	public void setImage(String image) {
 		this.image=image;
 	}
 
-	public int Product_id() {
+	public int getProduct_id() {
 
 		return this.product_id;
 	}
 
 
-	public String product_name() {
+	public String getProduct_name() {
 
 		return this.product_name;
 	}
 
-	public int price() {
+	public int getPrice() {
 
 		return this.price;
 	}
 
-	public int exist_product() {
+	public int getExist_product() {
 
 		return this.exist_product;
 	}
 
-	public String image() {
+	public String getImage() {
 
 		return this.image;
 	}

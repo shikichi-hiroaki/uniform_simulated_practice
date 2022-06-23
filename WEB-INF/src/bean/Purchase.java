@@ -10,9 +10,12 @@ public class Purchase {
 	private int count; // 注文数
 	private int amount_money; // 金額
 	private String buy_date; // 購入日
-	private String pament_date; // 入金日
+	private String payment_date; // 入金日
 	private String shopping_date; // 発送日
 	private String others; // 備考欄
+	private String mail_adress; //メールアドレス
+	private String place;	//住所
+	private String phone_number;	//電話番号
 
 	// コンストラクタ
 	public Purchase() {
@@ -24,9 +27,12 @@ public class Purchase {
 		this.count = 0;
 		this.amount_money = 0;
 		this.buy_date = null;
-		this.pament_date = null;
+		this.payment_date = null;
 		this.shopping_date = null;
 		this.others = null;
+		this.mail_adress = null;
+		this.place = null;
+		this.phone_number = null;
 
 	}
 
@@ -60,7 +66,7 @@ public class Purchase {
 	}
 
 	public void setPament_date(String pament_date) {
-		this.pament_date = pament_date;
+		this.payment_date = pament_date;
 	}
 
 	public void setShopping_date(String shopping_date) {
@@ -69,6 +75,15 @@ public class Purchase {
 
 	public void setOthers(String others) {
 		this.others = others;
+	}
+	public void setMail_adress(String mail_adress) {
+		this.mail_adress = mail_adress;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 
 	// getメソッド
@@ -101,7 +116,7 @@ public class Purchase {
 	}
 
 	public String getPament_date() {
-		return pament_date;
+		return payment_date;
 	}
 
 	public String getShopping_date() {
@@ -112,4 +127,16 @@ public class Purchase {
 		return others;
 	}
 
+	public String getmail_adress() {
+		return mail_adress;
+	}
+
+	public String getplace() {
+		return place;
+	}
+
+	public String getphone_number() {
+		return phone_number;
+	}
 }
+
