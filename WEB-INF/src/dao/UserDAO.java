@@ -29,6 +29,7 @@ public class UserDAO {
 		con.close();
 	}
 
+	//ユーザー情報確認
 	public User selectByUser(String user_id) {
 
 		User user = new User();
@@ -114,6 +115,7 @@ public class UserDAO {
 
 	}
 
+	//会員登録
 	public void insert(User user) {
 
 		String sql = "INSERT INTO user VALUES('" + user.getUser_id() + "','" + user.getUser_name() + "',"
@@ -148,6 +150,7 @@ public class UserDAO {
 		}
 	}
 
+	//会員情報変更
 	public void update(User user) {
 		Connection con = null;
 		Statement smt = null;

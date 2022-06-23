@@ -2,46 +2,51 @@ package bean;
 
 public class Product {
 
-	private int product_id;//商品ID
-	private String product_name;//商品名
-	private int price;//価格
-	private int exist_products;//在庫数
-	private String image;//画像
+	private int product_id;// 商品ID
+	private String product_name;// 商品名
+	private int price;// 価格
+	private int exist_products;// 在庫数
+	private String image;// 画像
+	private int on_sale;// 販売状況
 
-	public Product(){
+	public Product() {
 
-		this.product_id=0;
-		this.product_name=null;
-		this.price=0;
-		this.exist_products=0;
-		this.image=null;
+		this.product_id = 0;
+		this.product_name = null;
+		this.price = 0;
+		this.exist_products = 0;
+		this.image = null;
+		this.on_sale = 0;
 	}
 
 	public void setProduct_id(int product_id) {
-		this.product_id=product_id;
+		this.product_id = product_id;
 	}
 
 	public void setProduct_name(String product_name) {
-		this.product_name=product_name;
+		this.product_name = product_name;
 	}
 
 	public void setPrice(int price) {
-		this.price=price;
+		this.price = price;
 	}
 
 	public void setExist_products(int exist_products) {
-		this.exist_products=exist_products;
+		this.exist_products = exist_products;
 	}
 
 	public void setImage(String image) {
-		this.image=image;
+		this.image = image;
+	}
+
+	public void setOn_sale(int on_sale) {
+		this.on_sale = on_sale;
 	}
 
 	public int getProduct_id() {
 
 		return this.product_id;
 	}
-
 
 	public String getProduct_name() {
 
@@ -63,5 +68,8 @@ public class Product {
 		return this.image;
 	}
 
+	public int getOn_sale() {
+		return this.on_sale;
+	}
 
 }

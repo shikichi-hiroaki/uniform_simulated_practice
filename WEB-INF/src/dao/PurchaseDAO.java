@@ -26,7 +26,7 @@ public class PurchaseDAO {
 	public ArrayList<Purchase> selectAll() {
 
 		ArrayList<Purchase> list = new ArrayList<Purchase>();
-		String sql = "SELECT * FROM purchase ORDER BY ISBN";
+		String sql = "SELECT * FROM purchase ORDER BY purchase_id";
 
 		Connection con = null;
 		Statement smt = null;
@@ -44,7 +44,7 @@ public class PurchaseDAO {
 				purchase.setMail_adress(rs.getString("mail_adress"));
 				purchase.setPhone_number(rs.getString("phone_number"));
 				purchase.setPlace(rs.getString("place"));
-				purchase.setProduct_id(rs.getString("product_id"));
+				purchase.setProduct_id(rs.getInt("product_id"));
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
 				purchase.setBuy_date(rs.getString("buy_date"));
@@ -72,18 +72,19 @@ public class PurchaseDAO {
 			}
 		}
 		return list;
-
 	}
 
+
+	//ユーザー登録なしで購入する際のメソット
 	public void insert(Purchase purchase) {
 
 		Connection con = null;
 		Statement smt = null;
 
 		try {
-
 			String sql = "INSERT INTO purchase VALUES('" + purchase.getUser_name() + "','" + purchase.getplace() + "',"
-					+ purchase.getphone_number() + "','" + purchase.getmail_adress() + "','" + purchase.getCount() + "')";
+					+ purchase.getphone_number() + "','" + purchase.getmail_adress() + "','" + purchase.getCount()
+					+ "','" + purchase.getProduct_id() +  "')";
 
 			con = PurchaseDAO.getConnection();
 			smt = con.createStatement();
@@ -91,7 +92,7 @@ public class PurchaseDAO {
 			smt.executeUpdate(sql);
 
 		} catch (Exception e) {
-			throw new IllegalStateException("insert" + e);
+			throw new IllegalStateException(e);
 
 		} finally {
 			if (smt != null) {
@@ -110,15 +111,15 @@ public class PurchaseDAO {
 	}
 
 
-	// 注文詳細（注文ID）
-	public Purchase selectByProductId(String purchase_id) {
+	// 注文詳細（注文IDでの検索）
+	public Purchase selectByPurchaseId(int purchase_id) {
 
 		Connection con = null;
 		Statement smt = null;
 
 		Purchase purchase = new Purchase();
 
-		String sql = "select * from bookinfo where isbn ='" + purchase_id + "'";
+		String sql = "select * from uniform_db where  purchase_id='" + purchase_id + "'";
 
 		try {
 			con = PurchaseDAO.getConnection();
@@ -133,7 +134,7 @@ public class PurchaseDAO {
 				purchase.setMail_adress(rs.getString("mail_adress"));
 				purchase.setPhone_number(rs.getString("phone_number"));
 				purchase.setPlace(rs.getString("place"));
-				purchase.setProduct_id(rs.getString("product_id"));
+				purchase.setProduct_id(rs.getInt("product_id"));
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
 				purchase.setBuy_date(rs.getString("buy_date"));
@@ -162,14 +163,15 @@ public class PurchaseDAO {
 	}
 
 	// 注文詳細（ユーザーID）
-	public Purchase selectByUserId(String purchase_id) {
+	public ArrayList<Purchase> selectByUserId(String user_id) {
 
+		//変数宣言
 		Connection con = null;
 		Statement smt = null;
-
+		ArrayList<Purchase> list = new ArrayList<Purchase>();
 		Purchase purchase = new Purchase();
 
-		String sql = "select * from bookinfo where isbn ='" + purchase_id + "'";
+		String sql = "select * from uniform_db where user_id ='" + user_id + "'";
 
 		try {
 			con = PurchaseDAO.getConnection();
@@ -184,13 +186,15 @@ public class PurchaseDAO {
 				purchase.setMail_adress(rs.getString("mail_adress"));
 				purchase.setPhone_number(rs.getString("phone_number"));
 				purchase.setPlace(rs.getString("place"));
-				purchase.setProduct_id(rs.getString("product_id"));
+				purchase.setProduct_id(rs.getInt("product_id"));
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
 				purchase.setBuy_date(rs.getString("buy_date"));
 				purchase.setPament_date(rs.getString("pament_name"));
 				purchase.setShopping_date(rs.getString("shopping_date"));
 				purchase.setOthers(rs.getString("other"));
+
+				list.add(purchase);
 			}
 
 		} catch (Exception e) {
@@ -209,6 +213,6 @@ public class PurchaseDAO {
 				}
 			}
 		}
-		return purchase;
+		return list;
 	}
 }

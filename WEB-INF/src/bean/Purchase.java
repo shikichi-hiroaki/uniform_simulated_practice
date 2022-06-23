@@ -6,7 +6,7 @@ public class Purchase {
 	private int purchase_id; // 購入ID
 	private String user_id; // ユーザーID
 	private String user_name; //ユーザー名
-	private String product_id; // 商品ID
+	private int product_id; // 商品ID
 	private int count; // 注文数
 	private int amount_money; // 金額
 	private String buy_date; // 購入日
@@ -23,7 +23,7 @@ public class Purchase {
 		this.purchase_id = 0;
 		this.user_id = null;
 		this.user_name = null;
-		this.product_id = null;
+		this.product_id = 0;
 		this.count = 0;
 		this.amount_money = 0;
 		this.buy_date = null;
@@ -49,7 +49,7 @@ public class Purchase {
 		this.user_name = user_name;
 	}
 
-	public void setProduct_id(String product_id) {
+	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
 
@@ -99,7 +99,7 @@ public class Purchase {
 		return user_name;
 	}
 
-	public String getProduct_id() {
+	public int getProduct_id() {
 		return product_id;
 	}
 
