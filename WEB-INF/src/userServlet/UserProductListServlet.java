@@ -25,9 +25,13 @@ public class UserProductListServlet extends HttpServlet {
 		ProductDAO productDaoObj = new ProductDAO();
 
 		try {
+			//文字エンコード
+			request.setCharacterEncoding("UTF-8");
+
+
 			User user = (User) session.getAttribute("user");
 
-			if (user.getUser_id() == null) {
+			if (user== null) {
 
 				if (session.getAttribute("set") == "login") {
 					request.setAttribute("error", "セッション切れの為、一覧画面に戻ります");

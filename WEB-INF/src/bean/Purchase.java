@@ -65,8 +65,8 @@ public class Purchase {
 		this.buy_date = buy_date;
 	}
 
-	public void setPament_date(String pament_date) {
-		this.payment_date = pament_date;
+	public void setPayment_date(String payment_date) {
+		this.payment_date = payment_date;
 	}
 
 	public void setShopping_date(String shopping_date) {
@@ -115,7 +115,7 @@ public class Purchase {
 		return buy_date;
 	}
 
-	public String getPament_date() {
+	public String getPayment_date() {
 		return payment_date;
 	}
 

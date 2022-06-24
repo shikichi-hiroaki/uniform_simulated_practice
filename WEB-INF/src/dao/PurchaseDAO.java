@@ -48,9 +48,9 @@ public class PurchaseDAO {
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
 				purchase.setBuy_date(rs.getString("buy_date"));
-				purchase.setPament_date(rs.getString("pament_name"));
+				purchase.setPayment_date(rs.getString("payment_date"));
 				purchase.setShopping_date(rs.getString("shopping_date"));
-				purchase.setOthers(rs.getString("other"));
+				purchase.setOthers(rs.getString("others"));
 
 				list.add(purchase);
 			}
@@ -74,17 +74,17 @@ public class PurchaseDAO {
 		return list;
 	}
 
-
-	//ユーザー登録なしで購入する際のメソット
+	// ユーザー登録なしで購入する際のメソット
 	public void insert(Purchase purchase) {
 
 		Connection con = null;
 		Statement smt = null;
 
 		try {
-			String sql = "INSERT INTO purchase VALUES('" + purchase.getUser_name() + "','" + purchase.getplace() + "',"
-					+ purchase.getphone_number() + "','" + purchase.getmail_adress() + "','" + purchase.getCount()
-					+ "','" + purchase.getProduct_id() +  "')";
+			String sql = "INSERT INTO purchase VALUES(null,null,'" + purchase.getUser_name() + "','"
+					+ purchase.getmail_adress() + "','" + purchase.getphone_number() + "','" + purchase.getplace()
+					+ "'," + purchase.getProduct_id() + "," + purchase.getCount() + "," + purchase.getAmount_money()
+					+ ",curdate(),null,null,'" + purchase.getOthers() + "')";
 
 			con = PurchaseDAO.getConnection();
 			smt = con.createStatement();
@@ -109,7 +109,6 @@ public class PurchaseDAO {
 			}
 		}
 	}
-
 
 	// 注文詳細（注文IDでの検索）
 	public Purchase selectByPurchaseId(int purchase_id) {
@@ -138,9 +137,9 @@ public class PurchaseDAO {
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
 				purchase.setBuy_date(rs.getString("buy_date"));
-				purchase.setPament_date(rs.getString("pament_name"));
+				purchase.setPayment_date(rs.getString("payment_name"));
 				purchase.setShopping_date(rs.getString("shopping_date"));
-				purchase.setOthers(rs.getString("other"));
+				purchase.setOthers(rs.getString("others"));
 			}
 
 		} catch (Exception e) {
@@ -165,7 +164,7 @@ public class PurchaseDAO {
 	// 注文詳細（ユーザーID）
 	public ArrayList<Purchase> selectByUserId(String user_id) {
 
-		//変数宣言
+		// 変数宣言
 		Connection con = null;
 		Statement smt = null;
 		ArrayList<Purchase> list = new ArrayList<Purchase>();
@@ -190,9 +189,9 @@ public class PurchaseDAO {
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
 				purchase.setBuy_date(rs.getString("buy_date"));
-				purchase.setPament_date(rs.getString("pament_name"));
+				purchase.setPayment_date(rs.getString("payment_name"));
 				purchase.setShopping_date(rs.getString("shopping_date"));
-				purchase.setOthers(rs.getString("other"));
+				purchase.setOthers(rs.getString("others"));
 
 				list.add(purchase);
 			}

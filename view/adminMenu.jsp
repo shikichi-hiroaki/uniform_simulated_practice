@@ -16,17 +16,17 @@
 			<table style="margin:auto ; width:950 ; text-align:center">
 				<tr>
 					<td>
-						<a href="<%=request.getContextPath()%>/view/insert.jsp" >商品一覧</a>
+						<a href="<%=request.getContextPath()%>/adminProductList" >商品一覧</a>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<a href="<%=request.getContextPath()%>/list">商品受注状況一覧</a>
+						<a href="<%=request.getContextPath()%>/productOrder">商品受注状況一覧</a>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<a href="<%=request.getContextPath()%>/showCart">商品登録画面</a>
+						<a href="<%=request.getContextPath()%>/productInsert">商品登録画面</a>
 					</td>
 				</tr>
 				<tr>

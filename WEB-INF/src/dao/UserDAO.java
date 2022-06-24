@@ -8,7 +8,7 @@ import bean.*;
 public class UserDAO {
 
 	private static String RDB_DRIVE = "com.mysql.jdbc.Driver";
-	private static String URL = "jdbc:mysql://localhost/uniformdb";
+	private static String URL = "jdbc:mysql://localhost/uniform_db";
 	private static String USER = "root";
 	private static String PASSWORD = "root123";
 
@@ -118,9 +118,9 @@ public class UserDAO {
 	//会員登録
 	public void insert(User user) {
 
-		String sql = "INSERT INTO user VALUES('" + user.getUser_id() + "','" + user.getUser_name() + "',"
-				+ user.getMail_adress() + "'," + user.getPlace() + "'," + user.getPhone_number() + "',"
-				+ user.getPassword() + "'," + user.getAuthority() + ")";
+		String sql = "INSERT INTO user VALUES('" + user.getUser_id() + "','" + user.getUser_name() +  "','"
+				+ user.getMail_adress() + "','" + user.getPlace() + "','" + user.getPhone_number() + "','"
+				+ user.getPassword() +  "','" + user.getAuthority() + "')";
 
 		Connection con = null;
 		Statement smt = null;

@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.*,bean.*"%>
 <html>
 <head>
 		<title>商品一覧(管理者)</title>
@@ -11,7 +12,7 @@
 
 			<td width="508" align="center"><font size="5">商品一覧</font></td>
 			<td width="120">[<a
-				href="<%=request.getContextPath()%>/view/menu.jsp">管理者メニュー</a>]
+				href="<%=request.getContextPath()%>/view/adminMenu.jsp">管理者メニュー</a>]
 			</td>
 
 		</tr>
@@ -21,17 +22,31 @@
 
 	<p align="center">ユニフォーム一覧</p>
 
+	<%
+		ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
+		if (list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				Product products = (Product) list.get(i);
+	%>
+
+	<p align="center">
+		<a href="<%=request.getContextPath()%>/userProductDetail?name=<%=products.getProduct_id()%>"><%=products.getProduct_id()%></a>
+	</p>
+
+	<%
+		}
+		} else {
+	%>
+		<form action="<%=request.getContextPath()%>/userProductList">
+		<p align="center"><input type="submit" value="一覧表示"></p>
+		</form>
+	<%
+		}
+	%>
+
+	<br>
 	<br>
 
-	<p align="center"><a href="<%=request.getContextPath()%>/view/menu.jsp">・ユニフォームA</a></p>
-	<p align="center"><a href="<%=request.getContextPath()%>/リンク">・ユニフォームB</a></p>
-	<p align="center"><a href="<%=request.getContextPath()%>/リンク">・ユニフォームC</a></p>
-	<p align="center"><a href="<%=request.getContextPath()%>/リンク">・ユニフォームD</a></p>
-	<p align="center"><a href="<%=request.getContextPath()%>/リンク">・ユニフォームE</a></p>
-
-	<br>
-	<br>
-
 
 	<br>
 	<br>
@@ -44,7 +59,6 @@
 	<br>
 	<br>
 
-	<hr align="center" size="5" color="blue" width="950"></hr>
 
 </body>
 </html>
