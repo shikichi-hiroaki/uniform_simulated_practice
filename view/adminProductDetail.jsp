@@ -55,7 +55,7 @@ if (product == null) {
 			<table align="center">
 				<tr>
 					<td width="220" align="center"><a
-						href="<%=request.getContextPath()%>">商品一覧</a></td>
+						href="<%=request.getContextPath()%>/adminProductList">商品一覧</a></td>
 				</tr>
 				<tr>
 					<td width="220" align="center"><a

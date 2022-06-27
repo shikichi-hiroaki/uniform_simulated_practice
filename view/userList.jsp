@@ -16,7 +16,7 @@
 				<tr>
 					<td style="width:250"></td>
 					<td align="center" style="width:450"><h3>ユーザー情報一覧</h3></td>
-					<td style="width:250"><a href="<%=request.getContextPath()%>/adminMen.jsp">管理者メニュー</a></td>
+					<td style="width:250"><a href="<%=request.getContextPath()%>/view/adminMenu.jsp">管理者メニュー</a></td>
 				<tr>
 			</table>
 			<hr style="width:950 ; color:black ; size:2 "/>
@@ -43,8 +43,8 @@
 					<td align="center" width="100"><%=user.getUser_id() %></td>
 					<td align="center" width="100"><%=user.getUser_name() %></td>
 					<td align="center" width="100"><%=user.getMail_adress() %></td>
+					<td align="center" width="100"><%=user.getPlace() %></td>
 					<td align="center" width="100"><%=user.getPhone_number() %></td>
-					<td align="center" width="100">[注文履歴]</td>
 						<td style="width:100">
 							<a href="<%=request.getContextPath()%>/ProductOrder?user_id=" + user.getUser_id>注文履歴</a>
 						</td>

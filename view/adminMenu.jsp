@@ -26,7 +26,7 @@
 				</tr>
 				<tr>
 					<td>
-						<a href="<%=request.getContextPath()%>/productInsert">商品登録画面</a>
+						<a href="<%=request.getContextPath()%>/view/productInsert.jsp" >商品登録画面</a>
 					</td>
 				</tr>
 				<tr>

@@ -21,9 +21,10 @@
 			<td width="80"><input type="submit" value="ログイン">
 			</td>
 			</form>
-			<td width="80">[<a
-				href="<%=request.getContextPath()%>/userInsert">会員登録</a>]
+			<form action="<%=request.getContextPath()%>/view/userInsert.jsp" method="post">
+			<td width="80"><input type="submit" value="会員登録">
 			</td>
+			</form>
 		</tr>
 	</table>
 	<%

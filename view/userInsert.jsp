@@ -12,7 +12,7 @@
 		<br> <br>
 
 		<h2>新規会員登録</h2>
-		<form action="<%=request.getContextPath()%>/userInsert">
+		<form action="<%=request.getContextPath()%>/userInsert"	 method="post">
 			<table style="margin: auto; text-align: center; width: 700">
 				<tr>
 					<td width="200">名前</td>
