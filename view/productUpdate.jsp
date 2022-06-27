@@ -21,9 +21,11 @@ tr td:first-child {
 	<h2 style="text-align: center;">商品更新</h2>
 	<hr size="5" style="width: 950px;">
 	<!-- 商品更新フォーム -->
-	<form action="<%=request.getContextPath()%> %>/productUpdate"
-		style="margin: 50px;">
+	<form action="<%=request.getContextPath()%>/productUpdate"
+		style="margin: 50px;" method="post" enctype="multipart/form-data">
 		<table style="margin: 0 auto;">
+			<input type="hidden" name="product_id"
+				value="<%=product.getProduct_id()%>">
 			<tr>
 				<td>商品名</td>
 				<td><input type="text" name="product_name"
@@ -37,7 +39,7 @@ tr td:first-child {
 			<tr>
 				<td>在庫数</td>
 				<td><input type="number" name="exist_product"
-					value="<%=product.getExist_product()%>"></td>
+					value="<%=product.getExist_products()%>"></td>
 			</tr>
 			<tr>
 				<td>商品画像</td>

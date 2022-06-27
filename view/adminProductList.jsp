@@ -30,14 +30,14 @@
 	%>
 
 	<p align="center">
-		<a href="<%=request.getContextPath()%>/userProductDetail?name=<%=products.getProduct_id()%>"><%=products.getProduct_id()%></a>
+		<a href="<%=request.getContextPath()%>/adminProductDetail?name=<%=products.getProduct_id()%>"><%=products.getProduct_name()%></a>
 	</p>
 
 	<%
 		}
 		} else {
 	%>
-		<form action="<%=request.getContextPath()%>/userProductList">
+		<form action="<%=request.getContextPath()%>/adminProductList">
 		<p align="center"><input type="submit" value="一覧表示"></p>
 		</form>
 	<%

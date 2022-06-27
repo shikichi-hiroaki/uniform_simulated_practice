@@ -1,4 +1,5 @@
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@page import="java.util.*,bean.*"%>
 
 <html>
 <head>
@@ -39,14 +40,20 @@
 				<th style="background-color: skyblue; text-align: center">商品</th>
 				<td><select name="product_id">
 						<%
-							int i = 1;
+						ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
+						if (list != null) {
+							for (int i = 0; i < list.size(); i++) {
+								Product products = (Product) list.get(i);
+
+							int j = 1;
 						%>
 
-						<option value=<%=i%>>ユニフォーム</option>
-						<option value="2">ユニフォームB</option>
-						<option value="3">ユニフォームC</option>
-						<option value="4">ユニフォームD</option>
-						<option value="5">ユニフォームE</option>
+						<option value="<%=j%>"><%=products.getProduct_name()%></option>
+
+						<%
+							}
+						%>
+
 				</select></td>
 			</tr>
 			<tr>

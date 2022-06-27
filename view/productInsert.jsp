@@ -12,7 +12,7 @@
 	<h2 style="text-align: center;">商品登録</h2>
 	<hr style="width: 950;">
 	<!-- 商品登録フォーム -->
-	<form action="<%=request.getContextPath()%>/productInsert" style="margin: 50px;">
+	<form action="<%=request.getContextPath()%>/productInsert" style="margin: 50px;" method="post" enctype="multipart/form-data">
 		<table style="margin: auto;">
 			<tr>
 				<td>商品名</td>
@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>在庫数</td>
-				<td><input type="number" name="exist_products" id=""></td>
+				<td><input type="number" name="exist_products" id="" min="1"></td>
 			</tr>
 			<tr>
 				<td>商品画像</td>

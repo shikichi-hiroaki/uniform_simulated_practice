@@ -8,6 +8,7 @@
 <body>
 	<%
 		User user = (User) request.getAttribute("user");
+
 		if (session.getAttribute("set") == null) {
 	%>
 
@@ -16,24 +17,24 @@
 			<td width="80">&nbsp;</td>
 			<td width="80">&nbsp;</td>
 			<td width="508" align="center"><font size="5">商品一覧</font></td>
-			<td width="80">[<a
-				href="<%=request.getContextPath()%>/view/login">ログイン</a>]
+			<form action="<%=request.getContextPath()%>/view/login.jsp" method="post">
+			<td width="80"><input type="submit" value="ログイン">
 			</td>
+			</form>
 			<td width="80">[<a
-				href="<%=request.getContextPath()%>/view/userInsert">会員登録</a>]
+				href="<%=request.getContextPath()%>/userInsert">会員登録</a>]
 			</td>
 		</tr>
 	</table>
 	<%
-		} else {
+		}
+		if(session.getAttribute("set")=="login"){
 	%>
 
 	<table align="center" width="850">
 		<tr>
 			<td width="200">&nbsp;</td>
-			<td width="80">&nbsp;</td>
 			<td width="508" align="center"><font size="5">商品一覧</font></td>
-			<td width="80"><%=user.getUser_id()%></td>
 			<td width="200">[<a
 				href="<%=request.getContextPath()%>/view/userMenu.jsp">ユーザーメニュー</a>]
 			</td>
@@ -75,7 +76,7 @@
 	<br>
 	<br>
 
-	<form action="<%=request.getContextPath()%>/view/productBuy">
+	<form action="<%=request.getContextPath()%>/view/productBuy.jsp">
 		<p align="center">
 			<input type="submit" value="購入">
 		</p>
