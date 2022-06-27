@@ -101,6 +101,15 @@
 		<url-pattern>/logOrder</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>logDetailMapping</servlet-name>
+		<servlet-class>userServlet.LogDetailServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>logDetailMapping</servlet-name>
+		<url-pattern>/logDetail</url-pattern>
+	</servlet-mapping>
+
 
 	<!-- 管理者 -->
 	<servlet>
@@ -173,6 +182,15 @@
 	<servlet-mapping>
 		<servlet-name>orderDetailConfirmMapping</servlet-name>
 		<url-pattern>/orderDetailConfirm</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>userListMapping</servlet-name>
+		<servlet-class>adminServlet.UserListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userListMapping</servlet-name>
+		<url-pattern>/userList</url-pattern>
 	</servlet-mapping>
 
 </web-app>

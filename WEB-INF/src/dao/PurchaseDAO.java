@@ -39,8 +39,6 @@ public class PurchaseDAO {
 			while (rs.next()) {
 				Purchase purchase = new Purchase();
 				purchase.setPurchase_id(rs.getInt("purchase_id"));
-				purchase.setUser_id(rs.getString("user_id"));
-				purchase.setUser_name(rs.getString("user_name"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
 				purchase.setPhone_number(rs.getString("phone_number"));
 				purchase.setPlace(rs.getString("place"));
@@ -81,10 +79,10 @@ public class PurchaseDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "INSERT INTO purchase VALUES(null,null,'" + purchase.getUser_name() + "','"
-					+ purchase.getmail_adress() + "','" + purchase.getphone_number() + "','" + purchase.getplace()
-					+ "'," + purchase.getProduct_id() + "," + purchase.getCount() + "," + purchase.getAmount_money()
-					+ ",curdate(),null,null,'" + purchase.getOthers() + "')";
+			String sql = "INSERT INTO purchase VALUES(null,'" + purchase.getmail_adress() + "','"
+					+ purchase.getphone_number() + "','" + purchase.getplace() + "'," + purchase.getProduct_id() + ","
+					+ purchase.getCount() + "," + purchase.getAmount_money() + ",curdate(),null,null,'"
+					+ purchase.getOthers() + "')";
 
 			con = PurchaseDAO.getConnection();
 			smt = con.createStatement();
@@ -118,7 +116,7 @@ public class PurchaseDAO {
 
 		Purchase purchase = new Purchase();
 
-		String sql = "select * from uniform_db where  purchase_id='" + purchase_id + "'";
+		String sql = "select * from purchase where purchase_id=" + purchase_id ;
 
 		try {
 			con = PurchaseDAO.getConnection();
@@ -128,8 +126,6 @@ public class PurchaseDAO {
 
 			while (rs.next()) {
 				purchase.setPurchase_id(rs.getInt("purchase_id"));
-				purchase.setUser_id(rs.getString("user_id"));
-				purchase.setUser_name(rs.getString("user_name"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
 				purchase.setPhone_number(rs.getString("phone_number"));
 				purchase.setPlace(rs.getString("place"));
@@ -137,7 +133,7 @@ public class PurchaseDAO {
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
 				purchase.setBuy_date(rs.getString("buy_date"));
-				purchase.setPayment_date(rs.getString("payment_name"));
+				purchase.setPayment_date(rs.getString("payment_date"));
 				purchase.setShopping_date(rs.getString("shopping_date"));
 				purchase.setOthers(rs.getString("others"));
 			}
@@ -161,8 +157,8 @@ public class PurchaseDAO {
 		return purchase;
 	}
 
-	// 注文詳細（ユーザーID）
-	public ArrayList<Purchase> selectByUserId(String user_id) {
+	// 注文詳細（メールアドレス）
+	public ArrayList<Purchase> selectByUserId(String mail_adress) {
 
 		// 変数宣言
 		Connection con = null;
@@ -170,7 +166,7 @@ public class PurchaseDAO {
 		ArrayList<Purchase> list = new ArrayList<Purchase>();
 		Purchase purchase = new Purchase();
 
-		String sql = "select * from uniform_db where user_id ='" + user_id + "'";
+		String sql = "select * from uniform_db where mail_adress ='" + mail_adress + "'";
 
 		try {
 			con = PurchaseDAO.getConnection();
@@ -180,8 +176,6 @@ public class PurchaseDAO {
 
 			while (rs.next()) {
 				purchase.setPurchase_id(rs.getInt("purchase_id"));
-				purchase.setUser_id(rs.getString("user_id"));
-				purchase.setUser_name(rs.getString("user_name"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
 				purchase.setPhone_number(rs.getString("phone_number"));
 				purchase.setPlace(rs.getString("place"));
@@ -214,4 +208,70 @@ public class PurchaseDAO {
 		}
 		return list;
 	}
+
+	// 入金日を更新
+	public void updatePayment(String payment_date, String purchase_id) {
+		Connection con = null;
+		Statement smt = null;
+
+		String sql = "UPDATE purchase SET payment_date ='" + payment_date + "' WHERE purchase_id = " + purchase_id + "";
+
+		try {
+
+			con = getConnection();
+			smt = con.createStatement();
+
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
+
+	// 発送日を更新
+	public void updateShopping(String shopping_date, String purchase_id) {
+		Connection con = null;
+		Statement smt = null;
+
+		String sql = "UPDATE purchase SET shopping_date ='" + shopping_date + "' WHERE purchase_id = " + purchase_id
+				+ "";
+
+		try {
+
+			con = getConnection();
+			smt = con.createStatement();
+
+			smt.executeUpdate(sql);
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+	}
+
 }

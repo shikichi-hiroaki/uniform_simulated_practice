@@ -4,8 +4,6 @@ public class Purchase {
 
 	// フィールド変数
 	private int purchase_id; // 購入ID
-	private String user_id; // ユーザーID
-	private String user_name; //ユーザー名
 	private int product_id; // 商品ID
 	private int count; // 注文数
 	private int amount_money; // 金額
@@ -13,16 +11,14 @@ public class Purchase {
 	private String payment_date; // 入金日
 	private String shopping_date; // 発送日
 	private String others; // 備考欄
-	private String mail_adress; //メールアドレス
-	private String place;	//住所
-	private String phone_number;	//電話番号
+	private String mail_adress; // メールアドレス
+	private String place; // 住所
+	private String phone_number; // 電話番号
 
 	// コンストラクタ
 	public Purchase() {
 
 		this.purchase_id = 0;
-		this.user_id = null;
-		this.user_name = null;
 		this.product_id = 0;
 		this.count = 0;
 		this.amount_money = 0;
@@ -39,14 +35,6 @@ public class Purchase {
 	// setメソッド
 	public void setPurchase_id(int purchase_id) {
 		this.purchase_id = purchase_id;
-	}
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
 	}
 
 	public void setProduct_id(int product_id) {
@@ -76,12 +64,15 @@ public class Purchase {
 	public void setOthers(String others) {
 		this.others = others;
 	}
+
 	public void setMail_adress(String mail_adress) {
 		this.mail_adress = mail_adress;
 	}
+
 	public void setPlace(String place) {
 		this.place = place;
 	}
+
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
@@ -89,14 +80,6 @@ public class Purchase {
 	// getメソッド
 	public int getPurchase_id() {
 		return purchase_id;
-	}
-
-	public String getUser_id() {
-		return user_id;
-	}
-
-	public String getUser_name() {
-		return user_name;
 	}
 
 	public int getProduct_id() {
@@ -139,4 +122,3 @@ public class Purchase {
 		return phone_number;
 	}
 }
-

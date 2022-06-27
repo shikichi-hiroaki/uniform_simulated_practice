@@ -77,7 +77,7 @@
 	<br>
 	<br>
 
-	<form action="<%=request.getContextPath()%>/view/productBuy.jsp">
+	<form action="<%=request.getContextPath()%>/productBuy">
 		<p align="center">
 			<input type="submit" value="購入">
 		</p>

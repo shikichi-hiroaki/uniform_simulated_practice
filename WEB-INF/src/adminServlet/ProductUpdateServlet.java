@@ -7,8 +7,8 @@ package adminServlet;
  * 作成日：20220623
  */
 
-import java.io.IOException;
-
+import java.io.*;
+import com.oreilly.servlet.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -17,7 +17,7 @@ import dao.ProductDAO;
 
 public class ProductUpdateServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 
 		String error = null;
@@ -26,24 +26,34 @@ public class ProductUpdateServlet extends HttpServlet {
 			//　文字コードの設定をする。
 			request.setCharacterEncoding("UTF-8");
 
+			String FilePath = getServletContext().getRealPath("image");
+			String imageName = "no_image.jpg";
+			int maxBytes  = 1024*1024;
+			MultipartRequest multireq = new MultipartRequest(request, FilePath, maxBytes, "MS932");
+
 			//　更新情報に関するパラメータを取得する。
-			int product_id = Integer.parseInt(request.getParameter("product_id"));
-			String product_name = request.getParameter("product_name");
-			int price = Integer.parseInt(request.getParameter("price"));
-			int exist_products = Integer.parseInt(request.getParameter("exist_products"));
-			int on_sale = Integer.parseInt(request.getParameter("on_sale"));
+			int product_id = Integer.parseInt(multireq.getParameter("product_id"));
+			String product_name = multireq.getParameter("product_name");
+			int price = Integer.parseInt(multireq.getParameter("price"));
+			int exist_product = Integer.parseInt(multireq.getParameter("exist_product"));
+			int on_sale = Integer.parseInt(multireq.getParameter("on_sale"));
+			if (multireq.getFile("image") != null) {
+				imageName = multireq.getFile("image").getName();
+			}
 
 			//　受け取ったデータをProductインスタンスにセットする。
 			Product product = new Product();
 			product.setProduct_id(product_id);
 			product.setProduct_name(product_name);
 			product.setPrice(price);
-			product.setExist_products(exist_products);
+			product.setExist_products(exist_product);
+			product.setImage(imageName);
 			product.setOn_sale(on_sale);
 
 			//　商品情報を更新する。
 			ProductDAO productDaoObj = new ProductDAO();
 			productDaoObj.update(product);
+
 		} catch (NumberFormatException e) {
 
 		} catch (IllegalStateException e) {

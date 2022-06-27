@@ -43,6 +43,8 @@ public class Product {
 		this.on_sale = on_sale;
 	}
 
+
+
 	public int getProduct_id() {
 
 		return this.product_id;

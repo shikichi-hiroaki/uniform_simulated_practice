@@ -5,24 +5,24 @@ import java.util.*;
 import bean.Product;
 
 public class ProductDAO {
-	//　データベース接続情報
-	private static String RDB_DRIVE ="com.mysql.jdbc.Driver";
-	private static String URL ="jdbc:mysql://localhost/uniform_db";
-	private static String USER ="root";
-	private static String PASS ="root123";
+	// データベース接続情報
+	private static String RDB_DRIVE = "com.mysql.jdbc.Driver";
+	private static String URL = "jdbc:mysql://localhost/uniform_db";
+	private static String USER = "root";
+	private static String PASS = "root123";
 
-	//　データベース接続を行うメソッド
+	// データベース接続を行うメソッド
 	private static Connection getConnection() {
 		try {
 			Class.forName(RDB_DRIVE);
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
 			return con;
-		} catch(Exception e){
-		    throw new IllegalStateException(e);
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
 		}
 	}
 
-	//　全商品情報を取得するメソッド
+	// 全商品情報を取得するメソッド
 	public ArrayList<Product> selectAll() {
 		Connection con = null;
 		Statement smt = null;
@@ -42,6 +42,7 @@ public class ProductDAO {
 				product.setPrice((rs.getInt("price")));
 				product.setExist_products((rs.getInt("exist_products")));
 				product.setImage((rs.getString("image")));
+				product.setOn_sale(rs.getInt("On_sale"));
 				productList.add(product);
 			}
 
@@ -64,15 +65,16 @@ public class ProductDAO {
 		return productList;
 	}
 
-	//　商品を登録するメソッド
+	// 商品を登録するメソッド
 	public void insert(Product product) {
 		Connection con = null;
 		Statement smt = null;
 		try {
 			con = getConnection();
 			smt = con.createStatement();
-			String sql = "INSERT INTO product VALUES(null,'" +  product.getProduct_name() + "',"
-					+  product.getPrice() + ", " + product.getExist_products() + ", '" + product.getImage() + "')";
+			String sql = "INSERT INTO product VALUES(null,'" + product.getProduct_name() + "'," + product.getPrice()
+					+ ", " + product.getExist_products() + ", '" + product.getImage() + "'," + product.getOn_sale()
+					+ ")";
 			smt.executeUpdate(sql);
 
 		} catch (Exception e) {
@@ -99,12 +101,10 @@ public class ProductDAO {
 		try {
 			con = getConnection();
 			smt = con.createStatement();
-			String sql = "UPDATE product SET "
-						+ "product_name='" + product.getProduct_name() + "',"
-						+ "price=" + product.getPrice() + ","
-						+ "exist_products=" + product.getExist_products() + ","
-						+ "image='" + product.getImage() + "' "
-						+ "where product_id=" + product.getProduct_id();
+			String sql = "UPDATE product SET " + "product_name='" + product.getProduct_name() + "'," + "price="
+					+ product.getPrice() + "," + "exist_products=" + product.getExist_products() + "," + "image='"
+					+ product.getImage() + "'," + "on_sale=" + product.getOn_sale() + " where product_id="
+					+ product.getProduct_id();
 			smt.executeUpdate(sql);
 
 		} catch (Exception e) {
@@ -125,7 +125,7 @@ public class ProductDAO {
 		}
 	}
 
-	//　商品情報を取得するメソッド
+	// 商品情報を取得するメソッド
 	public Product selectByProductid(int product_id) {
 
 		Connection con = null;
@@ -133,12 +133,12 @@ public class ProductDAO {
 		Product product = new Product();
 
 		try {
-			//　データベースに接続する。
+			// データベースに接続する。
 			con = getConnection();
 			smt = con.createStatement();
 			String sql = "select * from product where product_id = " + product_id;
 
-			//　データベースにsql文を送り、実行結果を取得する
+			// データベースにsql文を送り、実行結果を取得する
 			ResultSet rs = smt.executeQuery(sql);
 			if (rs.next()) {
 				product.setProduct_id(rs.getInt("product_id"));
@@ -146,44 +146,89 @@ public class ProductDAO {
 				product.setPrice(rs.getInt("price"));
 				product.setExist_products(rs.getInt("exist_products"));
 				product.setImage(rs.getString("image"));
+				product.setOn_sale(rs.getInt("On_sale"));
 			}
 
 		} catch (Exception e) {
- 			throw new IllegalStateException(e);
+			throw new IllegalStateException(e);
 		} finally {
-			//　リソースを開放する。
+			// リソースを開放する。
 			if (smt != null) {
 				try {
 					smt.close();
-				} catch (SQLException e) {}
+				} catch (SQLException e) {
+				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {}
+				} catch (SQLException e) {
+				}
 			}
 		}
 		return product;
 	}
 
-	//　商品を削除するメソッド
+	// 商品を削除するメソッド
 	public int delete(int product_id) {
 
 		Connection con = null;
 		Statement smt = null;
-		int count = 0; //　データベースの更新件数
+		int count = 0; // データベースの更新件数
 
 		try {
-			//　データベースに接続する。
+			// データベースに接続する。
 			con = getConnection();
 			smt = con.createStatement();
 			String sql = "delete from product where product_id=" + product_id;
-			//sql文をデータベースで実行し、該当の商品情報を削除し、更新件数を取得する。
+			// sql文をデータベースで実行し、該当の商品情報を削除し、更新件数を取得する。
 			count = smt.executeUpdate(sql);
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			// リソースを開放する。
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return count;
+	}
+
+	//発売中の商品名を配列で受け取るメソッド
+	public ArrayList<Product> selectNameByOnsale(){
+
+		Connection con = null;
+		Statement smt = null;
+		ArrayList<Product> nameList = new ArrayList<Product>();
+		String sql = "SELECT product_id,product_name FROM product WHERE on_sale=0";
+
+		try {
+			//データベースに接続し、情報を取得
+			con = getConnection();
+			smt = con.createStatement();
+			ResultSet rs = smt.executeQuery(sql);
+
+			//配列に商品名を格納
+			while(rs.next()) {
+				Product product = new Product();
+				product.setProduct_id(rs.getInt("product_id"));
+				product.setProduct_name(rs.getString("product_name"));
+				nameList.add(product);
+			}
+
 		} catch (Exception e) {
  			throw new IllegalStateException(e);
 		} finally {
-			//　リソースを開放する。
+			//リソースを開放する。
 			if (smt != null) {
 				try {
 					smt.close();
@@ -195,6 +240,9 @@ public class ProductDAO {
 				} catch (SQLException e) {}
 			}
 		}
-		return count;
+		return nameList;
 	}
 }
+
+
+

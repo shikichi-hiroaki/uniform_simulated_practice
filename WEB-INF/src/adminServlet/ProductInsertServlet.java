@@ -9,13 +9,17 @@
 package adminServlet;
 
 import java.io.*;
+import com.oreilly.servlet.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import com.oreilly.servlet.MultipartRequest;
+
 import bean.*;
 import dao.*;
 
 public class ProductInsertServlet extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// 変数
 		String error = ""; // エラーメッセージ
@@ -30,18 +34,25 @@ public class ProductInsertServlet extends HttpServlet {
 			// 文字指定
 			request.setCharacterEncoding("UTF-8");
 
+			String FilePath = getServletContext().getRealPath("image");
+			String imageName = "no_image.jpg";
+			int maxBytes  = 1024*1024;
+			MultipartRequest multireq = new MultipartRequest(request, FilePath, maxBytes, "MS932");
+
 			// 各パラメーター取得
 			Product product = new Product();
-			String product_name = request.getParameter("product_name");
-			String price = request.getParameter("price");
-			String exist_products = request.getParameter("exist_products");
-			String image = request.getParameter("image");
+			String product_name = multireq.getParameter("product_name");
+			String price = multireq.getParameter("price");
+			String exist_products = multireq.getParameter("exist_products");
+			if (multireq.getFile("image") != null) {
+				imageName = multireq.getFile("image").getName();
+			}
 
 			// オブジェクト格納
 			product.setProduct_name(product_name);
 			product.setPrice(Integer.parseInt(price));
 			product.setExist_products(Integer.parseInt(exist_products));
-			product.setImage(image);
+			product.setImage(imageName);
 
 			// 登録メソッド呼び出し
 			ProductDAO productDaoObj = new ProductDAO();

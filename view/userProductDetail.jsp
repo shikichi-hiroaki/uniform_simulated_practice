@@ -31,7 +31,7 @@
 		<table align="center">
 
 			<tr width="220" align="center">
-				<td><a href="<%=request.getContextPath()%>">商品一覧</a></td>
+				<td><a href="<%=request.getContextPath()%>/view/userProductList.jsp">商品一覧</a></td>
 			</tr>
 		</table>
 	</div>

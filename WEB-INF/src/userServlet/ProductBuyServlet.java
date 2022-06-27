@@ -1,66 +1,57 @@
 package userServlet;
 
 import java.io.*;
+import java.util.ArrayList;
 
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.*;
 
-import bean.*;
-import dao.*;
+import bean.Product;
+import bean.Purchase;
+import bean.User;
+import dao.ProductDAO;
+import dao.PurchaseDAO;
 
-public class ProductBuyServlet  extends HttpServlet {
+public class ProductBuyServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-	throws ServletException, IOException{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
-
-		//DTOオブジェクト宣言
-		Purchase purchase = new Purchase();
-		Product product=new Product();
-
-		//DAOオブジェクト宣言
-		PurchaseDAO purchaseDaoObj = new PurchaseDAO();
-		ProductDAO productDaoObj=new ProductDAO();
-
+		// 変数
+		String error = "";
+		String cmd = "";
+		User user = new User();
+		ArrayList<Product> nameList = new ArrayList<Product>();
 
 		try {
-
-			//文字エンコーディングの指定
+			// 文字エンコーディングの指定
 			request.setCharacterEncoding("UTF-8");
-			//パラメータの取得
 
-			String user_name = request.getParameter("user_name");
-			String place = request.getParameter("place");
-			String phone_number = request.getParameter("phone_number");
-			String mail_adress = request.getParameter("mail_adress");
-			int product_id = Integer.parseInt(request.getParameter("product_id"));
-			int count = Integer.parseInt(request.getParameter("count"));
-			String others = request.getParameter("others");
+			// DAOオブジェクト宣言
+			ProductDAO productDaoObj = new ProductDAO();
 
-			product=productDaoObj.selectByProductid(product_id);
+			// ユーザーセッション取得
+			HttpSession session = request.getSession();
+			user = (User) session.getAttribute("user");
 
-			int money=product.getPrice();
+			// メソッドの呼び出し
+			nameList = productDaoObj.selectNameByOnsale();
 
-			purchase.setUser_name(user_name);
-			purchase.setPlace(place);
-			purchase.setPhone_number(phone_number);
-			purchase.setMail_adress(mail_adress);
-			purchase.setProduct_id(product_id);
-			purchase.setCount(count);
-			purchase.setOthers(others);
-			purchase.setAmount_money(money*count);
+		} catch (IllegalStateException e) {
+			error = "エラー";
+			cmd = "logout";
 
-
-			purchaseDaoObj.insert(purchase);
-
-			request.getRequestDispatcher("/view/productBuy.jsp").forward(request, response);
-
-		}catch(Exception e) {
-
+		} finally {
+			if (error.equals("")) {
+				request.setAttribute("nameList", nameList);
+				//if (user.getAuthority() == 2) {
+					//request.setAttribute("user", user);結合の際はコメントを外す
+				//}
+				request.getRequestDispatcher("/view/productBuy.jsp").forward(request, response);
+			} else {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			}
 		}
-
 	}
-
 }

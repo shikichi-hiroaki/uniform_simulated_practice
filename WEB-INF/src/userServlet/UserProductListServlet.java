@@ -31,6 +31,7 @@ public class UserProductListServlet extends HttpServlet {
 
 			User user = (User) session.getAttribute("user");
 
+
 			if (user== null) {
 
 				if (session.getAttribute("set") == "login") {

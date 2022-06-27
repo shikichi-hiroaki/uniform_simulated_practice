@@ -10,7 +10,21 @@ import bean.*;
 import dao.*;;
 
 public class AdminProductListServlet extends HttpServlet {
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		commonProcess(request, response);
+
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		commonProcess(request, response);
+
+	}
+
+	public void commonProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 		String set = null;
@@ -20,18 +34,17 @@ public class AdminProductListServlet extends HttpServlet {
 		ProductDAO productDaoObj = new ProductDAO();
 
 		try {
-		list = productDaoObj.selectAll();
+			list = productDaoObj.selectAll();
 
-		request.setAttribute("list", list);
+			request.setAttribute("list", list);
 
+			request.getRequestDispatcher("view/adminProductList.jsp").forward(request, response);
 
-		request.getRequestDispatcher("view/userProductList.jsp").forward(request, response);
+		} catch (Exception e) {
+			request.setAttribute("error", "セッション未入力の為、一覧画面に戻ります");
+			cmd = "list";
+			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+		}
 
-	} catch (Exception e) {
-		request.setAttribute("error", "セッション未入力の為、一覧画面に戻ります");
-		cmd = "list";
-		request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 	}
-
-}
 }
