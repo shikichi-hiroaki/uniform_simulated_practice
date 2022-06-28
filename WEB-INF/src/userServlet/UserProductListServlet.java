@@ -37,8 +37,12 @@ public class UserProductListServlet extends HttpServlet {
 				if (session.getAttribute("set") == "login") {
 					request.setAttribute("error", "セッション切れの為、一覧画面に戻ります");
 					cmd = "list";
+					set = null;
+					session.setAttribute("set", set);
 					request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 				}
+				set = null;
+				session.setAttribute("set", set);
 
 			} else {
 				set = "login";

@@ -26,10 +26,18 @@ public class BuyCompletedServlet extends HttpServlet {
 		String product_name = null;
 		Product product = new Product();
 		ProductDAO productDaoObj = new ProductDAO();
+		String cmd="";
 
 		try {
 			// セッションから情報の取得
 			user = (User) session.getAttribute("user");
+
+			if (user == null) {
+				error= "セッション切れための為、購入はできません。";
+				cmd = "user";
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			}
+
 			purchase = (Purchase) session.getAttribute("purchase");
 
 			// DBに登録
@@ -51,7 +59,7 @@ public class BuyCompletedServlet extends HttpServlet {
 			sendMail.MailSetup(user.getUser_name(), purchase, product_name);
 
 		} catch (Exception e) {
-			error = "エラー";
+			error = "DBに接続出来ませんでした。";
 
 		} finally {
 			if (error.equals("")) {

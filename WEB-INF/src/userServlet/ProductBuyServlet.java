@@ -21,6 +21,7 @@ public class ProductBuyServlet extends HttpServlet {
 		String cmd = "";
 		User user = new User();
 		ArrayList<Product> nameList = new ArrayList<Product>();
+		String null_check = null;
 
 		try {
 			// 文字エンコーディングの指定
@@ -31,20 +32,29 @@ public class ProductBuyServlet extends HttpServlet {
 
 			// ユーザーセッション取得
 			HttpSession session = request.getSession();
-			user = (User) session.getAttribute("user");
 
-			// メソッドの呼び出し
-			nameList = productDaoObj.selectNameByOnsale();
+			try {
+				user = (User) session.getAttribute("user");
+
+				// メソッドの呼び出し
+				nameList = productDaoObj.selectNameByOnsale();
+			} catch (Exception e) {
+
+				null_check = "not_null";
+
+			}
 
 		} catch (IllegalStateException e) {
-			error = "エラー";
-			cmd = "logout";
+			error = "DBに接続出来ませんでした";
+			cmd = "user";
 
 		} finally {
 			if (error.equals("")) {
 				request.setAttribute("nameList", nameList);
-				if (user.getAuthority() == 2) {
-					request.setAttribute("user", user);
+				if (null_check == null) {
+					if (user.getAuthority() == 2) {
+						request.setAttribute("user", user);
+					}
 				}
 				request.getRequestDispatcher("/view/productBuy.jsp").forward(request, response);
 			} else {

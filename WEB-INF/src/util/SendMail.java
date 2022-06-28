@@ -19,8 +19,6 @@ public class SendMail {
 		try {
 			Properties props = System.getProperties();
 
-			Purchase purchases=new Purchase();
-
 			// SMTPサーバのアドレスを指定（今回はxserverのSMTPサーバを利用）
 			props.put("mail.smtp.host", "sv5215.xserver.jp");
 			props.put("mail.smtp.auth", "true");
@@ -31,16 +29,16 @@ public class SendMail {
 			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
 					// メールサーバにログインするメールアドレスとパスワードを設定
-					return new PasswordAuthentication("test.sender@kanda-it-school-system.com", "kandaSender");
+					return new PasswordAuthentication("system.project.team30@kanda-it-school-system.com", "Ha6k1bOWFNJJI9p");
 				}
 			});
 
 			MimeMessage mimeMessage = new MimeMessage(session);
 
 			// 送信元メールアドレスと送信者名を指定
-			mimeMessage.setFrom(new InternetAddress("test.sender@kanda-it-school-system.com", "神田IT School", "iso-2022-jp"));
+			mimeMessage.setFrom(new InternetAddress("system.project.team30@kanda-it-school-system.com", "神田IT School", "iso-2022-jp"));
 
-			String mail_adress=purchases.getmail_adress();
+			String mail_adress=purchase.getmail_adress();
 
 			// 送信先メールアドレスを指定
 			mimeMessage.setRecipients(Message.RecipientType.TO, mail_adress);
@@ -51,7 +49,7 @@ public class SendMail {
 			String message = userid + "様\n\nユニフォームのご購入ありがとうございます。\n" + "以下内容でご注文を受け付けましたので、ご連絡致します。\n\n";
 
 
-			message += product_name+ " " + purchase.getCount() + " " + purchase.getAmount_money() + "円\n";
+			message += product_name+ " " + purchase.getCount() + "個 " + purchase.getAmount_money() + "円\n";
 
 			message += "またのご利用よろしくお願いします。";
 
