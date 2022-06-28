@@ -27,18 +27,26 @@ public class UserInsertServlet extends HttpServlet {
 			String place = request.getParameter("place");
 			String phone_number = request.getParameter("phone_number");
 			String mail_adress = request.getParameter("mail_adress");
-			String user_id = request.getParameter("user_id");
 			String password = request.getParameter("password");
-
 
 			user.setUser_name(user_name);
 			user.setPlace(place);
 			user.setPhone_number(phone_number);
 			user.setMail_adress(mail_adress);
-			user.setUser_id(user_id);
 			user.setPassword(password);
+			user.setAuthority(2);
 
-			userDaoObj.insert(user);
+			User users = new User();
+			users = userDaoObj.selectByUser(mail_adress);
+
+			if (users.getMail_adress() ==null) {
+
+				userDaoObj.insert(user);
+
+			} else {
+
+				userDaoObj.update(user);
+			}
 
 		} finally {
 

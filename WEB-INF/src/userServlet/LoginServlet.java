@@ -57,10 +57,10 @@ public class LoginServlet extends HttpServlet {
 				if (authority == 1) {
 					request.getRequestDispatcher("/view/adminMenu.jsp").forward(request, response);
 
-				} else if (authority == 0) {
+				} else if (authority == 2) {
 					session.setAttribute("user", user);
 					request.getRequestDispatcher("/view/userMenu.jsp").forward(request, response);
-				}else if(authority==2) {
+				}else if(authority==0) {
 					request.setAttribute("error", "会員ではありません。");
 					cmd="login";
 					request.setAttribute("cmd", cmd);

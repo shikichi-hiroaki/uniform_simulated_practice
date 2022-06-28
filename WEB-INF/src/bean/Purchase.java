@@ -12,8 +12,6 @@ public class Purchase {
 	private String shopping_date; // 発送日
 	private String others; // 備考欄
 	private String mail_adress; // メールアドレス
-	private String place; // 住所
-	private String phone_number; // 電話番号
 
 	// コンストラクタ
 	public Purchase() {
@@ -27,8 +25,7 @@ public class Purchase {
 		this.shopping_date = null;
 		this.others = null;
 		this.mail_adress = null;
-		this.place = null;
-		this.phone_number = null;
+
 
 	}
 
@@ -69,13 +66,6 @@ public class Purchase {
 		this.mail_adress = mail_adress;
 	}
 
-	public void setPlace(String place) {
-		this.place = place;
-	}
-
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
-	}
 
 	// getメソッド
 	public int getPurchase_id() {
@@ -114,11 +104,5 @@ public class Purchase {
 		return mail_adress;
 	}
 
-	public String getplace() {
-		return place;
-	}
 
-	public String getphone_number() {
-		return phone_number;
-	}
 }

@@ -43,9 +43,9 @@ public class ProductBuyServlet extends HttpServlet {
 		} finally {
 			if (error.equals("")) {
 				request.setAttribute("nameList", nameList);
-				//if (user.getAuthority() == 2) {
-					//request.setAttribute("user", user);結合の際はコメントを外す
-				//}
+				if (user.getAuthority() == 2) {
+					request.setAttribute("user", user);
+				}
 				request.getRequestDispatcher("/view/productBuy.jsp").forward(request, response);
 			} else {
 				request.setAttribute("error", error);

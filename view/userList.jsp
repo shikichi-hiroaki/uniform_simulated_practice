@@ -24,7 +24,6 @@
 			<!-- ユーザー情報一覧を表示 -->
 			<table style="margin:auto ; width:950">
 				<tr>
-					<td style="width:100 ;  background-color:lightgreen">ユーザーID</td>
 					<td style="width:100 ; background-color:lightgreen">氏名</td>
 					<td style="width:150 ; background-color:lightgreen">メールアドレス</td>
 					<td align="left" style="width:300; background-color:lightgreen">住所</td>
@@ -40,7 +39,6 @@
 				%>
 
 				<tr>
-					<td align="center" width="100"><%=user.getUser_id() %></td>
 					<td align="center" width="100"><%=user.getUser_name() %></td>
 					<td align="center" width="100"><%=user.getMail_adress() %></td>
 					<td align="center" width="100"><%=user.getPlace() %></td>

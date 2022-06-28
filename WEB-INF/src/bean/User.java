@@ -2,7 +2,6 @@ package bean;
 
 public class User {
 
-	private String user_id;//ユーザーID
 	private String user_name;//ユーザー名
 	private String mail_adress;//メールアドレス
 	private String place;//住所
@@ -11,7 +10,6 @@ public class User {
 	private int authority;//権限
 
 	public User() {
-		user_id = null;
 		user_name = null;
 		mail_adress = null;
 		place = null;
@@ -20,9 +18,6 @@ public class User {
 		authority = 0;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
 
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
@@ -45,12 +40,9 @@ public class User {
 	}
 
 	public void setAuthority(int authority) {
-		this.authority = authority;
+		this.authority=authority;
 	}
 
-	public String getUser_id() {
-		return this.user_id;
-	}
 
 	public String getUser_name() {
 		return this.user_name;

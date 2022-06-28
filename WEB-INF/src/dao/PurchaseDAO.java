@@ -40,8 +40,6 @@ public class PurchaseDAO {
 				Purchase purchase = new Purchase();
 				purchase.setPurchase_id(rs.getInt("purchase_id"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
-				purchase.setPhone_number(rs.getString("phone_number"));
-				purchase.setPlace(rs.getString("place"));
 				purchase.setProduct_id(rs.getInt("product_id"));
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
@@ -79,8 +77,7 @@ public class PurchaseDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "INSERT INTO purchase VALUES(null,'" + purchase.getmail_adress() + "','"
-					+ purchase.getphone_number() + "','" + purchase.getplace() + "'," + purchase.getProduct_id() + ","
+			String sql = "INSERT INTO purchase VALUES(null,'" + purchase.getmail_adress() + "'," + purchase.getProduct_id() + ","
 					+ purchase.getCount() + "," + purchase.getAmount_money() + ",curdate(),null,null,'"
 					+ purchase.getOthers() + "')";
 
@@ -127,8 +124,6 @@ public class PurchaseDAO {
 			while (rs.next()) {
 				purchase.setPurchase_id(rs.getInt("purchase_id"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
-				purchase.setPhone_number(rs.getString("phone_number"));
-				purchase.setPlace(rs.getString("place"));
 				purchase.setProduct_id(rs.getInt("product_id"));
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));
@@ -177,8 +172,6 @@ public class PurchaseDAO {
 			while (rs.next()) {
 				purchase.setPurchase_id(rs.getInt("purchase_id"));
 				purchase.setMail_adress(rs.getString("mail_adress"));
-				purchase.setPhone_number(rs.getString("phone_number"));
-				purchase.setPlace(rs.getString("place"));
 				purchase.setProduct_id(rs.getInt("product_id"));
 				purchase.setCount(rs.getInt("count"));
 				purchase.setAmount_money(rs.getInt("amount_money"));

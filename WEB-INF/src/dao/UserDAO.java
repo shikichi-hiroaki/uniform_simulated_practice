@@ -29,7 +29,7 @@ public class UserDAO {
 		con.close();
 	}
 
-	//ユーザー情報確認
+	// ユーザー情報確認
 	public User selectByUser(String mail_adress) {
 
 		User user = new User();
@@ -113,12 +113,12 @@ public class UserDAO {
 
 	}
 
-	//会員登録
+	// 会員登録
 	public void insert(User user) {
 
-		String sql = "INSERT INTO user VALUES('" + user.getUser_name() +  "','"
-				+ user.getMail_adress() + "','" + user.getPlace() + "','" + user.getPhone_number() + "','"
-				+ user.getPassword() +  "'," + 0 + ")";
+		String sql = "INSERT INTO user VALUES('" + user.getUser_name() + "','" + user.getMail_adress() + "','"
+				+ user.getPlace() + "','" + user.getPhone_number() + "','" + user.getPassword() + "',"
+				+ user.getAuthority() + ")";
 
 		Connection con = null;
 		Statement smt = null;
@@ -148,13 +148,14 @@ public class UserDAO {
 		}
 	}
 
-	//会員情報変更
+	// 会員情報変更
 	public void update(User user) {
 		Connection con = null;
 		Statement smt = null;
 
-		String sql = "UPDATE user SET user_name='" +  user.getUser_name() + "',mail_adress='" + user.getMail_adress() + "',place='" + user.getPlace() +"',phone_number='" + user.getPhone_number() +"',password='" + user.getPassword() +"' WHERE mail_adress ='"
-				+  user.getMail_adress() + "'";
+		String sql = "UPDATE user SET user_name='" + user.getUser_name() + "',mail_adress='" + user.getMail_adress()
+				+ "',place='" + user.getPlace() + "',phone_number='" + user.getPhone_number() + "',password='"
+				+ user.getPassword() + "',authority="+ user.getAuthority() +" WHERE mail_adress ='" + user.getMail_adress() + "'";
 
 		try {
 

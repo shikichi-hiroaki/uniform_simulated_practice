@@ -35,10 +35,7 @@
 			</table>
 			<br>
 			<table style="margin: auto; text-align: center; width: 700">
-				<tr>
-					<td width="200">ID</td>
-					<td width="500"><input type="text" name="user_id"></td>
-				</tr>
+
 				<tr>
 					<td width="200">パスワード</td>
 					<td width="500"><input type="password" name="password"></td>

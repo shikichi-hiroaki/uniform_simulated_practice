@@ -36,12 +36,14 @@ public class UserUpdateServlet extends HttpServlet {
 			String phone_number = request.getParameter("phone_number");
 			String mail_adress = request.getParameter("mail_adress");
 			String password = request.getParameter("password");
+			int authority=Integer.parseInt(request.getParameter("authority"));
 
 			user.setUser_name(user_name);
 			user.setPlace(place);
 			user.setPhone_number(phone_number);
 			user.setMail_adress(mail_adress);
 			user.setPassword(password);
+			user.setAuthority(authority);
 
 			// 更新用メソッドを呼び出す。
 			userDaoObj.update(user);
