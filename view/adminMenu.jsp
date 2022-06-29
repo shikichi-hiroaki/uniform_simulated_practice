@@ -1,5 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page import="java.util.*"%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/adminstyle.css">
+
 
 <html>
 	<head>

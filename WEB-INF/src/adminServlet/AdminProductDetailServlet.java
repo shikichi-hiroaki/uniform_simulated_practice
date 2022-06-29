@@ -17,25 +17,38 @@ import dao.*;
 
 public class AdminProductDetailServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-	throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String error = null;
 		String cmd = null;
 
 		try {
-			//文字コード設定
+			// 文字コード設定
 			request.setCharacterEncoding("UTF-8");
 
-			//　リクエストスコープで受け取った商品IDを取得する。
+			// リクエストスコープで受け取った商品IDを取得する。
 			int product_id = Integer.parseInt(request.getParameter("product_id"));
 			cmd = request.getParameter("cmd");
 
-			//　受け取った商品IDを持つ商品を取得する。
+			// 受け取った商品IDを持つ商品を取得する。
 			ProductDAO productDaoObj = new ProductDAO();
 			Product product = productDaoObj.selectByProductid(product_id);
 
-			//　取得した商品情報をリクエストスコープに登録する。
+			// 商品一覧画面の商品リンクをクリック時、表示対象のユニフォームが存在しない場合の処理
+			if (product.getProduct_id() == 0) {
+				error = "表示対象のユニフォームが存在しないため、詳細情報は表示できません。";
+				cmd = "admin";
+				return;
+			}
+
+			// 変更ボタンをクリック時、変更対象のユニフォームが存在しない
+			if (productDaoObj.selectByProductid(product_id).getProduct_id() == 0) {
+				error = "更新対象のユニフォームが存在しないため、更新画面は表示できません。";
+				cmd = "admin";
+				return;
+			}
+
+			// 取得した商品情報をリクエストスコープに登録する。
 			request.setAttribute("product", product);
 
 		} catch (IllegalStateException e) {

@@ -12,6 +12,9 @@ public class UserInsertServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String error = "";
+		String cmd = "";
+
 		try {
 			// 文字エンコーディングの指定
 			request.setCharacterEncoding("UTF-8");
@@ -29,9 +32,54 @@ public class UserInsertServlet extends HttpServlet {
 			String mail_adress = request.getParameter("mail_adress");
 			String password = request.getParameter("password");
 
+			// データの空白チェック
+			if (user_name.equals("")) {
+				error = "名前を入力してください。";
+				cmd = "user";
+				return;
+			}
+
+			if (place.equals("")) {
+				error = "住所を入力してください。";
+				cmd = "user";
+				return;
+			}
+
+			if (phone_number.equals("")) {
+				error = "電話番号を入力してください。";
+				cmd = "user";
+				return;
+			}
+
+			if (mail_adress.equals("")) {
+				error = "メールアドレスを入力してください。";
+				cmd = "user";
+				return;
+			}
+
+			if (password.equals("")) {
+				error = "パスワードを入力してください。";
+				cmd = "user";
+				return;
+			}
+
+			// 重複チェック
+			if (userDaoObj.selectByUser(mail_adress).getMail_adress() != null) {
+				error = "登録済みのメールアドレスです。";
+				cmd = "user";
+				return;
+			}
+
+			try {
+				user.setPhone_number(phone_number);
+			} catch (NumberFormatException e) {
+				error = "電話番号は数値で入力してください。";
+				cmd = "user";
+				return;
+			}
+
 			user.setUser_name(user_name);
 			user.setPlace(place);
-			user.setPhone_number(phone_number);
 			user.setMail_adress(mail_adress);
 			user.setPassword(password);
 			user.setAuthority(2);
@@ -39,7 +87,7 @@ public class UserInsertServlet extends HttpServlet {
 			User users = new User();
 			users = userDaoObj.selectByUser(mail_adress);
 
-			if (users.getMail_adress() ==null) {
+			if (users.getMail_adress() == null) {
 
 				userDaoObj.insert(user);
 

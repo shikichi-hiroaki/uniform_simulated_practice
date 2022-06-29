@@ -1,5 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page import="bean.*" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/adminstyle.css">
+
 
 <%
 Product product = (Product)request.getAttribute("product");

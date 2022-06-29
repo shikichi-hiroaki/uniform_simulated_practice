@@ -155,7 +155,8 @@ public class UserDAO {
 
 		String sql = "UPDATE user SET user_name='" + user.getUser_name() + "',mail_adress='" + user.getMail_adress()
 				+ "',place='" + user.getPlace() + "',phone_number='" + user.getPhone_number() + "',password='"
-				+ user.getPassword() + "',authority="+ user.getAuthority() +" WHERE mail_adress ='" + user.getMail_adress() + "'";
+				+ user.getPassword() + "',authority=" + user.getAuthority() + " WHERE mail_adress ='"
+				+ user.getMail_adress() + "'";
 
 		try {
 
@@ -227,4 +228,40 @@ public class UserDAO {
 
 	}
 
+	// mail_adressから名前を取得するメソッド
+	public String selectUsernameByMailadress(String mail_adress) {
+
+		String user_name = null;
+		Connection con = null;
+		Statement smt = null;
+		String sql = "SELECT user_name FROM user WHERE mail_adress='" + mail_adress + "'";
+
+		try {
+			con = UserDAO.getConnection();
+			smt = con.createStatement();
+
+			ResultSet rs = smt.executeQuery(sql);
+
+			if (rs.next()) {
+				user_name = rs.getString("user_name");
+			}
+
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return user_name;
+	}
 }

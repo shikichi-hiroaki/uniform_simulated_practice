@@ -14,8 +14,7 @@ import dao.UserDAO;
 
 public class LoginServlet extends HttpServlet {
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String error = "";
 		String cmd = "";
@@ -26,7 +25,6 @@ public class LoginServlet extends HttpServlet {
 			String mail_adress = (String) request.getParameter("mailadress");
 			String password = (String) request.getParameter("password");
 
-
 			// UserDAOをインスタンス化し、ユーザー情報の検索
 			UserDAO userDaoObj = new UserDAO();
 			User user = userDaoObj.selectByUser(mail_adress, password);
@@ -34,8 +32,20 @@ public class LoginServlet extends HttpServlet {
 
 			// ユーザー情報のチェック
 			if (user.getMail_adress() == null) {
-				error = "入力データが間違っています。";
-				cmd = "login";
+				error = "メールアドレスを入力してください。";
+				cmd = "user";
+				return;
+			}
+			if (user.getPassword() == null) {
+				error = "パスワードを入力してください。";
+				cmd = "user";
+				return;
+			}
+
+			// パスワードまたはメールアドレスが違う場合
+			if (!(user.getMail_adress().equals(user.getMail_adress())) || !(user.getPassword().equals(user.getPassword()))) {
+				error = "メールアドレスまたはパスワードが違います。";
+				cmd = "user";
 				return;
 			}
 
@@ -60,17 +70,17 @@ public class LoginServlet extends HttpServlet {
 				} else if (authority == 2) {
 					session.setAttribute("user", user);
 					request.getRequestDispatcher("/view/userMenu.jsp").forward(request, response);
-				}else if(authority==0) {
+				} else if (authority == 0) {
 					request.setAttribute("error", "会員ではありません。");
-					cmd="login";
+					cmd = "login";
 					request.setAttribute("cmd", cmd);
 					request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 				}
 			}
 
 		} catch (IllegalStateException e) {
-			error = "DB接続エラーの為、ログイン出来ません。";
-			cmd = "login";
+			error = "データベースに接続できませんでした。";
+			cmd = "user";
 
 		} finally {
 			if (error.equals("")) {

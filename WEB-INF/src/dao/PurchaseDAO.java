@@ -77,9 +77,9 @@ public class PurchaseDAO {
 		Statement smt = null;
 
 		try {
-			String sql = "INSERT INTO purchase VALUES(null,'" + purchase.getmail_adress() + "'," + purchase.getProduct_id() + ","
-					+ purchase.getCount() + "," + purchase.getAmount_money() + ",curdate(),null,null,'"
-					+ purchase.getOthers() + "')";
+			String sql = "INSERT INTO purchase VALUES(null,'" + purchase.getmail_adress() + "',"
+					+ purchase.getProduct_id() + "," + purchase.getCount() + "," + purchase.getAmount_money()
+					+ ",curdate(),null,null,'" + purchase.getOthers() + "')";
 
 			con = PurchaseDAO.getConnection();
 			smt = con.createStatement();
@@ -113,7 +113,7 @@ public class PurchaseDAO {
 
 		Purchase purchase = new Purchase();
 
-		String sql = "select * from purchase where purchase_id=" + purchase_id ;
+		String sql = "select * from purchase where purchase_id=" + purchase_id;
 
 		try {
 			con = PurchaseDAO.getConnection();
@@ -265,6 +265,46 @@ public class PurchaseDAO {
 				}
 			}
 		}
+	}
+
+	// 月ごとの売上を取得するメソッド
+	public ArrayList<Purchase> monthlySales(String yearMonth) {
+
+		Connection con = null;
+		Statement smt = null;
+		ArrayList<Purchase> monthlySalesList = new ArrayList<Purchase>();
+		String sql = "SELECT purchase_id,amount_money FROM purchase WHERE buy_date LIKE '" + yearMonth + "%'";
+
+		try {
+			con = PurchaseDAO.getConnection();
+			smt = con.createStatement();
+
+			ResultSet rs = smt.executeQuery(sql);
+
+			while (rs.next()) {
+				Purchase purchase = new Purchase();
+				purchase.setPurchase_id(rs.getInt("purchase_id"));
+				purchase.setAmount_money(rs.getInt("Amount_money"));
+
+				monthlySalesList.add(purchase);
+			}
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			if (smt != null) {
+				try {
+					smt.close();
+				} catch (SQLException ignore) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ignore) {
+				}
+			}
+		}
+		return monthlySalesList;
 	}
 
 }

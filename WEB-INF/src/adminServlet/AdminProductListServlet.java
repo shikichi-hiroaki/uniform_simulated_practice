@@ -41,7 +41,7 @@ public class AdminProductListServlet extends HttpServlet {
 			request.getRequestDispatcher("view/adminProductList.jsp").forward(request, response);
 
 		} catch (Exception e) {
-			request.setAttribute("error", "セッション未入力の為、一覧画面に戻ります");
+			request.setAttribute("error", "セッション未入力の為、一覧画面に戻ります。");
 			cmd = "list";
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		}

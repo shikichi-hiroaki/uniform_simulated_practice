@@ -16,6 +16,8 @@ public class UserUpdateServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String error = "";
+		String cmd = "";
 		HttpSession session = request.getSession();
 
 		try {
@@ -38,6 +40,12 @@ public class UserUpdateServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			int authority=Integer.parseInt(request.getParameter("authority"));
 
+			//パスワードの空白チェック
+			if(password.equals("")) {
+				error = "パスワードが未入力のため、会員情報更新出来ませんでした。";
+				cmd = "user";
+			}
+
 			user.setUser_name(user_name);
 			user.setPlace(place);
 			user.setPhone_number(phone_number);
@@ -47,11 +55,20 @@ public class UserUpdateServlet extends HttpServlet {
 
 			// 更新用メソッドを呼び出す。
 			userDaoObj.update(user);
+		} catch (IllegalStateException e) {
+			error = "データベースに接続できませんでした。";
+			cmd = "user";
+			return;
+
 
 		} finally {
-
-			request.getRequestDispatcher("/view/userMenu.jsp").forward(request, response);
-
+			if (error.equals("")) {
+				request.getRequestDispatcher("/view/userMenu.jsp").forward(request, response);
+			} else {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			}
 		}
 	}
 }

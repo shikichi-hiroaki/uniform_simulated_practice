@@ -1,11 +1,13 @@
 <%@page contentType="text/html;charset=UTF-8"%>
-<%@page import="java.util.*,bean.*"%>
+<%@page import="java.util.*,bean.*,java.util.*"%>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/adminstyle.css">
 
 <%
 	ArrayList<Purchase> purchase_list = (ArrayList<Purchase>) request.getAttribute("purchase_list");
-	User user = (User) request.getAttribute("user");
-	int month = (int) request.getAttribute("month");
-	int sum = (int) request.getAttribute("sum");
+	ArrayList<String> userNameList = (ArrayList<String>) request.getAttribute("userNameList");
+	String month = (String) request.getAttribute("month");
+	int thisMonthlySales = (int) request.getAttribute("thisMonthlySales");
 %>
 
 
@@ -19,7 +21,7 @@
 		<table style="margin: auto; width: 950">
 			<tr>
 				<td style="width: 250"></td>
-				<td align="center" style="width: 450"><h3>受注管理一覧</h3></td>
+				<td align="center" style="width: 450"><h3>受注状況一覧</h3></td>
 				<td><a href="<%=request.getContextPath()%>/view/adminMenu.jsp">管理者メニュー</a></td>
 				<td><a href="<%=request.getContextPath()%>/userList">ユーザー一覧</a></td>
 			</tr>
@@ -29,37 +31,59 @@
 		<!-- 直近の売上合計を表示 -->
 		<table style="margin: auto; width: 950">
 			<tr>
-				<td style="text-align: end"><%=month%>月の売上 &emsp;<%=sum%>円</td>
+				<td style="text-align: end">今月(<%=month%>月)の売上 &emsp;<%=thisMonthlySales%>円
+				</td>
 			</tr>
 		</table>
 		<!-- 受注状況を表示 -->
 		<table style="margin: auto; width: 950">
 			<tr>
-				<td style="width: 50; background-color: lightgreen">No</td>
-				<td style="width: 100; background-color: lightgreen">氏名</td>
-				<td style="width: 130; background-color: lightgreen">種類</td>
-				<td style="width: 70; background-color: lightgreen">個数</td>
-				<td style="width: 100; background-color: lightgreen">合計金額</td>
-				<td style="width: 200; background-color: lightgreen">発注日</td>
-				<td style="width: 100; background-color: lightgreen">入金状況</td>
-				<td style="width: 100; background-color: lightgreen">発送状況</td>
-				<td style="width: 100; background-color: lightgreen"></td>
+				<td style="width: 50; color: white; background-color: #006600">No</td>
+				<td style="width: 100; color: white; background-color: #006600">氏名</td>
+				<td style="width: 130; color: white; background-color: #006600">種類</td>
+				<td style="width: 70; color: white; background-color: #006600">個数</td>
+				<td style="width: 100; color: white; background-color: #006600">合計金額</td>
+				<td style="width: 200; color: white; background-color: #006600">発注日</td>
+				<td style="width: 100; color: white; background-color: #006600">入金状況</td>
+				<td style="width: 100; color: white; background-color: #006600">発送状況</td>
+				<td style="width: 100; color: white; background-color: #006600"></td>
 			</tr>
 
 			<%
 				if (purchase_list != null) {
-					for (Purchase purchase : purchase_list) {
+					for (int i = 0; i < purchase_list.size(); i++) {
 			%>
 			<tr>
-				<td><%=purchase.getPurchase_id()%></td>
-				<td><%=user.getUser_name()%></td>
-				<td><%=purchase.getProduct_id()%></td>
-				<td><%=purchase.getCount()%></td>
-				<td><%=purchase.getAmount_money()%></td>
-				<td><%=purchase.getBuy_date()%></td>
-				<td><%=purchase.getPayment_date()%></td>
-				<td><%=purchase.getShopping_date()%></td>
-				<td><a href="<%=request.getContextPath()%>/orderDetailConfirm?purchase_id=<%=purchase.getPurchase_id()%>">詳細/更新</a></td>
+				<td><%=purchase_list.get(i).getPurchase_id()%></td>
+				<td><%=userNameList.get(i)%></td>
+				<td><%=purchase_list.get(i).getProduct_id()%></td>
+				<td><%=purchase_list.get(i).getCount()%></td>
+				<td><%=purchase_list.get(i).getAmount_money()%></td>
+				<td><%=purchase_list.get(i).getBuy_date()%></td>
+				<%
+					if (purchase_list.get(i).getPayment_date() == null) {
+				%>
+				<td>未入金</td>
+				<%
+					} else {
+				%>
+				<td><%=purchase_list.get(i).getPayment_date()%></td>
+				<%
+					}
+				%>
+				<%
+					if (purchase_list.get(i).getShopping_date() == null) {
+				%>
+				<td>未発送</td>
+				<%
+					} else {
+				%>
+				<td><%=purchase_list.get(i).getShopping_date()%></td>
+				<%
+					}
+				%>
+				<td><a
+					href="<%=request.getContextPath()%>/orderDetailConfirm?purchase_id=<%=purchase_list.get(i).getPurchase_id()%>&user_name=<%=userNameList.get(i)%>">詳細/更新</a></td>
 			</tr>
 			<%
 				}

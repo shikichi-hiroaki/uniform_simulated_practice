@@ -16,6 +16,7 @@ public class UserProductDetailServlet extends HttpServlet {
 		Product product = new Product();
 		ProductDAO proDaoObj = new ProductDAO();
 		String error = "";// エラーメッセージ
+		String cmd ="";
 
 		try {
 			// ユニフォームIDの受け取り
@@ -23,13 +24,24 @@ public class UserProductDetailServlet extends HttpServlet {
 
 			// ユニフォーム情報の取得
 			product = proDaoObj.selectByProductid(product_id);
+
+			if (product == null) {
+				error = "未登録の商品です。";
+				cmd = "user";
+
+			}
 		} catch (IllegalStateException e) {
-			error = "DBに接続できませんでした。";
-			request.setAttribute("error", error);
-			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			error = "データベースに接続できませんでした。";
+			cmd = "user";
 		} finally {
-			request.setAttribute("product", product);
-			request.getRequestDispatcher("/view/userProductDetail.jsp").forward(request, response);
+			if (error.equals("")) {
+				request.setAttribute("product", product);
+				request.getRequestDispatcher("/view/userProductDetail.jsp").forward(request, response);
+			} else {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			}
 		}
 	}
 }

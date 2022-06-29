@@ -34,6 +34,7 @@ public class OrderDetailConfirmServlet extends HttpServlet {
 
 		// 変数
 		String error = ""; // エラーメッセージ用
+		String cmd = "";
 
 		try {
 
@@ -43,7 +44,7 @@ public class OrderDetailConfirmServlet extends HttpServlet {
 			// 注文idパラメーター取得
 			String purchase_id = request.getParameter("purchase_id");
 			// cmdパラメータ取得(更新)
-			String cmd = request.getParameter("cmd");
+			cmd = request.getParameter("cmd");
 
 			// 入金・発送日時更新
 			if (cmd != null) {
@@ -81,9 +82,16 @@ public class OrderDetailConfirmServlet extends HttpServlet {
 			User user = userDaoObj.selectByUser(purchase.getmail_adress());
 			request.setAttribute("user", user); // リクエストスコープ
 
+			// 受注管理一覧の詳細画面をクリック時、表示対象の詳細が存在しない
+			if (purchase.getmail_adress() == null) {
+				error = "表示対象の情報が存在しないため、詳細情報は表示できません。";
+				cmd = "admin";
+				return;
+			}
+
 		} catch (IllegalStateException e) { // 接続エラー
 
-			error = "DB接続エラー";
+			error = "データベース接続エラー";
 
 		} finally {
 

@@ -15,6 +15,7 @@ public class LogDetailServlet extends HttpServlet{
 		HttpSession session = request.getSession();//セッションオブジェクトの生成
 		PurchaseDetail purchaseDetail = new PurchaseDetail();//DAOから受けとった情報を格納する変数
 		String error = null;
+		String cmd = "";
 
 		try {
 			//注文IDの受け取り
@@ -23,13 +24,24 @@ public class LogDetailServlet extends HttpServlet{
 			//DBから購入情報の検索
 			purchaseDetail = (PurchaseDetail)purchaseDetailDaoObj.selectByPurchaseId(purchase_id);
 
+			if (purchaseDetail == null) {
+				error = "存在しない注文情報です。";
+				cmd = "user";
+
+			}
+
 		} catch (IllegalStateException e) {
-			error = "DBに接続できませんでした。";
-			request.setAttribute("error", error);
-			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			error = "データベースに接続できませんでした。";
+			cmd = "user";
 		} finally {
-			request.setAttribute("purchaseDetail", purchaseDetail);
-			request.getRequestDispatcher("/view/logOrderDetail.jsp").forward(request, response);
+			if (error.equals("")) {
+				request.setAttribute("purchaseDetail", purchaseDetail);
+				request.getRequestDispatcher("/view/logOrderDetail.jsp").forward(request, response);
+			} else {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			}
 		}
 	}
 }

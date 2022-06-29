@@ -36,7 +36,7 @@ public class UserProductListServlet extends HttpServlet {
 
 				if (session.getAttribute("set") == "login") {
 					request.setAttribute("error", "セッション切れの為、一覧画面に戻ります");
-					cmd = "list";
+					cmd = "user";
 					set = null;
 					session.setAttribute("set", set);
 					request.getRequestDispatcher("/view/error.jsp").forward(request, response);
@@ -57,8 +57,8 @@ public class UserProductListServlet extends HttpServlet {
 			request.getRequestDispatcher("view/userProductList.jsp").forward(request, response);
 
 		} catch (Exception e) {
-			request.setAttribute("error", "セッション未入力の為、一覧画面に戻ります");
-			cmd = "list";
+			request.setAttribute("error", "データベースに接続できませんでした。");
+			cmd = "user";
 			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		}
 

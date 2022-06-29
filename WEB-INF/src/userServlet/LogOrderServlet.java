@@ -22,15 +22,15 @@ public class LogOrderServlet extends HttpServlet{
 
 		try {
 			//セッションからユーザー情報の受け取り
-			//user = (User)session.getAttribute("user");
+			user = (User)session.getAttribute("user");
 
 			//DBから購入情報の検索
-			list = (ArrayList<PurchaseDetail>)purchaseDetailDaoObj.selectByMailAdress("test@email");//結合の際は"user.getMail_adress"に変更
+			list = (ArrayList<PurchaseDetail>)purchaseDetailDaoObj.selectByMailAdress(user.getMail_adress());
 
-		//} catch (IllegalStateException e) {
-		//	error = "DBに接続できませんでした。";
-		//	request.setAttribute("error", error);
-		//	request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+		} catch (IllegalStateException e) {
+			error = "データベースに接続できませんでした。";
+			request.setAttribute("error", error);
+			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 		} finally {
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/view/logOrder.jsp").forward(request, response);

@@ -36,7 +36,7 @@ public class ProductInsertServlet extends HttpServlet {
 
 			String FilePath = getServletContext().getRealPath("image");
 			String imageName = "no_image.jpg";
-			int maxBytes  = 1024*1024;
+			int maxBytes = 1024 * 1024;
 			MultipartRequest multireq = new MultipartRequest(request, FilePath, maxBytes, "MS932");
 
 			// 各パラメーター取得
@@ -48,10 +48,52 @@ public class ProductInsertServlet extends HttpServlet {
 				imageName = multireq.getFile("image").getName();
 			}
 
+			// 全データの空白チェック
+			// 名前
+			if (product_name.equals("")) {
+				error = "商品名を入力してください。";
+				cmd = "admin";
+				return;
+			}
+			// 価格
+			if (price.equals("")) {
+				error = "価格を入力してください。";
+				cmd = "admin";
+				return;
+			}
+			// 在庫数
+			if (exist_products.equals("")) {
+				error = "在庫数を入力してください。";
+				cmd = "admin";
+				return;
+			}
+			// 画像
+			if (imageName == null) {
+				error = "画像を選択してください。";
+				cmd = "admin";
+				return;
+			}
+
 			// オブジェクト格納
 			product.setProduct_name(product_name);
-			product.setPrice(Integer.parseInt(price));
-			product.setExist_products(Integer.parseInt(exist_products));
+
+			// 価格値チェック（整数かどうか）
+			try {
+				product.setPrice(Integer.parseInt(price));
+			} catch (NumberFormatException e) {
+				error = "価格の値が不正のため、商品登録は行えません。";
+				cmd = "admin";
+				return;
+			}
+
+			// 在庫数値チェック（整数かどうか）
+			try {
+				product.setExist_products(Integer.parseInt(exist_products));
+			} catch (NumberFormatException e) {
+				error = "在庫数の値が不正のため、商品登録は行えません。";
+				cmd = "admin";
+				return;
+			}
 			product.setImage(imageName);
 
 			// 登録メソッド呼び出し
@@ -60,7 +102,7 @@ public class ProductInsertServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) { // DBエラー
 			error = "DBエラー";
-			cmd = "logout";
+			cmd = "admin";
 
 		} finally {
 			if (error.equals("")) {// 正常

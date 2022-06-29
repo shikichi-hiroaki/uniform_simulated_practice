@@ -18,26 +18,33 @@ public class UserListServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ArrayList<User> list = new ArrayList<User>();
+		String error = "";
+		String cmd = "";
 
 		try {
-		// UserDAOをインスタンス化し、関連メソッドを呼び出す
-		UserDAO userDaoObj = new UserDAO();
-		list = userDaoObj.selectAll();
+			// UserDAOをインスタンス化し、関連メソッドを呼び出す
+			UserDAO userDaoObj = new UserDAO();
+			list = userDaoObj.selectAll();
 
 		} catch (IllegalStateException e) {
+			error = "データベースに接続できませんでした。";
+			cmd = "admin";
 
 		} finally {
 
-		// 取得したListをリクエストスコープに"user_list"という名前で格納
-		request.setAttribute("user_list", list);
-
-		// userList.jspにフォワード
-		request.getRequestDispatcher("/view/userList.jsp").forward(request, response);
-
+			if (!error.equals("")) {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			} else {
+				// 取得したListをリクエストスコープに"user_list"という名前で格納
+				request.setAttribute("user_list", list);
+				// userList.jspにフォワード
+				request.getRequestDispatcher("/view/userList.jsp").forward(request, response);
+			}
 		}
 	}
 }
