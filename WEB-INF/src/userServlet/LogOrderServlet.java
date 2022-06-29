@@ -18,7 +18,8 @@ public class LogOrderServlet extends HttpServlet{
 		PurchaseDetailDAO purchaseDetailDaoObj = new PurchaseDetailDAO();
 		HttpSession session = request.getSession();//セッションオブジェクトの生成
 		ArrayList<PurchaseDetail> list = new ArrayList<PurchaseDetail>();//購入情報一覧を格納する変数
-		String error = null;
+		String error = "";
+		String cmd = "";
 
 		try {
 			//セッションからユーザー情報の受け取り

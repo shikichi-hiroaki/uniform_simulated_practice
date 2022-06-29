@@ -20,7 +20,7 @@
 			if (cmd.equals("admin")) {
 		%>
 
-		<a href="<%=request.getContextPath()%>/adminProductList">管理者一覧画面</a>
+		<a href="<%=request.getContextPath()%>/view/adminMenu.jsp">管理者メニュー画面</a>
 
 		<%
 			}

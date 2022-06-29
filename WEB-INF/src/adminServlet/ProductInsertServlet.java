@@ -37,7 +37,7 @@ public class ProductInsertServlet extends HttpServlet {
 			String FilePath = getServletContext().getRealPath("image");
 			String imageName = "no_image.jpg";
 			int maxBytes = 1024 * 1024;
-			MultipartRequest multireq = new MultipartRequest(request, FilePath, maxBytes, "MS932");
+			MultipartRequest multireq = new MultipartRequest(request, FilePath, maxBytes, "UTF-8");
 
 			// 各パラメーター取得
 			Product product = new Product();

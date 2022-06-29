@@ -33,15 +33,13 @@ public class ProductBuyServlet extends HttpServlet {
 			// ユーザーセッション取得
 			HttpSession session = request.getSession();
 
-			try {
-				user = (User) session.getAttribute("user");
+			user = (User) session.getAttribute("user");
 
-				// メソッドの呼び出し
-				nameList = productDaoObj.selectNameByOnsale();
-			} catch (Exception e) {
+			// メソッドの呼び出し
+			nameList = productDaoObj.selectNameByOnsale();
 
+			if (user == null) {
 				null_check = "not_null";
-
 			}
 
 		} catch (IllegalStateException e) {

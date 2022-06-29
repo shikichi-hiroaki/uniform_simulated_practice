@@ -19,7 +19,7 @@ public class ProductUpdateServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String error = null;
+		String error = "";
 		String cmd = "";
 		String strPrice = "";
 

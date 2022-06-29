@@ -19,15 +19,15 @@ public class AdminProductDetailServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String error = null;
-		String cmd = null;
+		String error = "";
+		String cmd = "";
 
 		try {
 			// 文字コード設定
 			request.setCharacterEncoding("UTF-8");
 
 			// リクエストスコープで受け取った商品IDを取得する。
-			int product_id = Integer.parseInt(request.getParameter("product_id"));
+			int product_id = Integer.parseInt(request.getParameter("name"));
 			cmd = request.getParameter("cmd");
 
 			// 受け取った商品IDを持つ商品を取得する。
@@ -51,16 +51,20 @@ public class AdminProductDetailServlet extends HttpServlet {
 			// 取得した商品情報をリクエストスコープに登録する。
 			request.setAttribute("product", product);
 
-		} catch (IllegalStateException e) {
+		}  catch (IllegalStateException e) {
 			error = "DB接続エラー";
+			cmd = "admin";
 		} finally {
-			if (error == null) {
+			if (error.equals("")) {
 				if (cmd != null) {
 					request.getRequestDispatcher("view/productUpdate.jsp").forward(request, response);
 				} else {
 					request.getRequestDispatcher("view/adminProductDetail.jsp").forward(request, response);
 				}
 			} else {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 
 			}
 		}

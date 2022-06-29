@@ -2,7 +2,7 @@
 package userServlet;
 
 import bean.*;
-import dao.ProductDAO;
+import dao.*;
 import util.SendMail;
 
 import javax.servlet.*;
@@ -19,6 +19,7 @@ public class BuyConfirmServlet extends HttpServlet {
 		String cmd = "";
 		User user = new User();
 		Purchase purchase = new Purchase();
+		PurchaseDAO purchaseDaoObj=new PurchaseDAO();
 		PurchaseDetail purchaseDetail = new PurchaseDetail();
 		Product product = new Product();
 		ProductDAO productDaoObj = new ProductDAO();
@@ -63,7 +64,7 @@ public class BuyConfirmServlet extends HttpServlet {
 			// 購入情報の取得
 			int product_id = Integer.parseInt(request.getParameter("product_id"));
 			purchase.setProduct_id(product_id);
-			String string_count=request.getParameter("product_id");
+			String string_count=request.getParameter("count");
 			if(string_count=="") {
 				error="価格が入力されていません。";
 			}

@@ -44,7 +44,7 @@
 					<td align="center" width="100"><%=user.getPlace() %></td>
 					<td align="center" width="100"><%=user.getPhone_number() %></td>
 						<td style="width:100">
-							<a href="<%=request.getContextPath()%>/ProductOrder?user_id=" + user.getUser_id>注文履歴</a>
+							<a href="<%=request.getContextPath()%>/productOrder?mail_adress=<%=user.getMail_adress()%>">注文履歴</a>
 						</td>
 				</tr>
 				<%

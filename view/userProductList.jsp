@@ -60,7 +60,7 @@
 	%>
 
 	<p align="center">
-		<a href="<%=request.getContextPath()%>/userProductDetail?name=<%=products.getProduct_id()%>"><%=products.getProduct_name()%></a>
+		<a href="<%=request.getContextPath()%>/userProductDetail?product_id=<%=products.getProduct_id()%>"><%=products.getProduct_name()%></a>
 	</p>
 
 	<%

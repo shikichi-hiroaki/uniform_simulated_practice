@@ -19,7 +19,8 @@ public class UserProductListServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String set = null;
-		String cmd = null;
+		String error = "";
+		String cmd = "";
 		Product product = new Product();
 		ArrayList<Product> list = new ArrayList<Product>();
 		ProductDAO productDaoObj = new ProductDAO();

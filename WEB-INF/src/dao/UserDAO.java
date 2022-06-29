@@ -186,7 +186,7 @@ public class UserDAO {
 	public ArrayList<User> selectAll() {
 
 		ArrayList<User> list = new ArrayList<User>();
-		String sql = "SELECT * FROM user WHERE authority = 0";
+		String sql = "SELECT * FROM user WHERE authority = 2";
 
 		Connection con = null;
 		Statement smt = null;

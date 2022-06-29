@@ -14,7 +14,7 @@ public class LogDetailServlet extends HttpServlet{
 		PurchaseDetailDAO purchaseDetailDaoObj = new PurchaseDetailDAO();
 		HttpSession session = request.getSession();//セッションオブジェクトの生成
 		PurchaseDetail purchaseDetail = new PurchaseDetail();//DAOから受けとった情報を格納する変数
-		String error = null;
+		String error = "";
 		String cmd = "";
 
 		try {
@@ -24,7 +24,7 @@ public class LogDetailServlet extends HttpServlet{
 			//DBから購入情報の検索
 			purchaseDetail = (PurchaseDetail)purchaseDetailDaoObj.selectByPurchaseId(purchase_id);
 
-			if (purchaseDetail == null) {
+			if (purchaseDetail.getMail_adress() == null) {
 				error = "存在しない注文情報です。";
 				cmd = "user";
 
@@ -34,8 +34,8 @@ public class LogDetailServlet extends HttpServlet{
 			error = "データベースに接続できませんでした。";
 			cmd = "user";
 		} finally {
-			if (error.equals("")) {
-				request.setAttribute("purchaseDetail", purchaseDetail);
+			if (error.equals("")){
+				request.setAttribute("purchaseDetail",purchaseDetail);
 				request.getRequestDispatcher("/view/logOrderDetail.jsp").forward(request, response);
 			} else {
 				request.setAttribute("error", error);

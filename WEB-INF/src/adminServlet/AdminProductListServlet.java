@@ -28,7 +28,8 @@ public class AdminProductListServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String set = null;
-		String cmd = null;
+		String error = "";
+		String cmd = "";
 		Product product = new Product();
 		ArrayList<Product> list = new ArrayList<Product>();
 		ProductDAO productDaoObj = new ProductDAO();
@@ -38,12 +39,23 @@ public class AdminProductListServlet extends HttpServlet {
 
 			request.setAttribute("list", list);
 
-			request.getRequestDispatcher("view/adminProductList.jsp").forward(request, response);
+		} catch (IllegalStateException e) { // 接続エラー
 
-		} catch (Exception e) {
-			request.setAttribute("error", "セッション未入力の為、一覧画面に戻ります。");
-			cmd = "list";
-			request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			error = "データベース接続エラー";
+			cmd = "admin";
+
+		} finally {
+
+			if (error.equals("")) {// 正常
+
+				request.getRequestDispatcher("view/adminProductList.jsp").forward(request, response);
+
+			} else { // エラー
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			}
 		}
 
 	}

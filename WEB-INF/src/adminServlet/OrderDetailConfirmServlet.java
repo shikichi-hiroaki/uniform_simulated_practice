@@ -45,10 +45,10 @@ public class OrderDetailConfirmServlet extends HttpServlet {
 			String purchase_id = request.getParameter("purchase_id");
 			// cmdパラメータ取得(更新)
 			cmd = request.getParameter("cmd");
-
+			PurchaseDAO purchaseDaoObj = new PurchaseDAO();
 			// 入金・発送日時更新
 			if (cmd != null) {
-				PurchaseDAO purchaseDaoObj = new PurchaseDAO();
+
 				String date = getNowDate(); // メソッドから日付取得
 
 				// 入金
@@ -68,7 +68,7 @@ public class OrderDetailConfirmServlet extends HttpServlet {
 			}
 
 			// 注文id検索メソッド呼び出し(個数、入金・発送状況、備考欄を取得)
-			PurchaseDAO purchaseDaoObj = new PurchaseDAO();
+
 			Purchase purchase = purchaseDaoObj.selectByPurchaseId(Integer.parseInt(purchase_id));
 			request.setAttribute("purchase", purchase); // リクエストスコープ
 
