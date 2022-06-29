@@ -23,9 +23,10 @@ tr td:first-child {
 	<!-- 商品更新フォーム -->
 	<form action="<%=request.getContextPath()%>/productUpdate"
 		style="margin: 50px;" method="post" enctype="multipart/form-data">
-		<table style="margin: 0 auto;">
-			<input type="hidden" name="product_id"
+		<input type="hidden" name="product_id"
 				value="<%=product.getProduct_id()%>">
+		<table style="margin: 0 auto;">
+
 			<tr>
 				<td>商品名</td>
 				<td><input type="text" name="product_name"

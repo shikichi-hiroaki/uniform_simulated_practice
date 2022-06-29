@@ -38,20 +38,39 @@ public class UserUpdateServlet extends HttpServlet {
 			String phone_number = request.getParameter("phone_number");
 			String password = request.getParameter("password");
 
+			// 空白チェック
+			if (user_name.equals("")) {
+				error = "氏名が未入力のため、会員情報更新出来ませんでした。";
+				cmd = "user";
+				return;
+			}
+
+			if (place.equals("")) {
+				error = "氏名が未入力のため、会員情報更新出来ませんでした。";
+				cmd = "user";
+				return;
+			}
+
+			if (phone_number.equals("")) {
+				error = "氏名が未入力のため、会員情報更新出来ませんでした。";
+				cmd = "user";
+				return;
+			}
+
 			// パスワードの空白チェック
 			if (password.equals("")) {
 				error = "パスワードが未入力のため、会員情報更新出来ませんでした。";
 				cmd = "user";
-			} else {
-
-				user.setUser_name(user_name);
-				user.setPlace(place);
-				user.setPhone_number(phone_number);
-				user.setPassword(password);
-
-				// 更新用メソッドを呼び出す。
-				userDaoObj.update(user);
+				return;
 			}
+			user.setUser_name(user_name);
+			user.setPlace(place);
+			user.setPhone_number(phone_number);
+			user.setPassword(password);
+
+			// 更新用メソッドを呼び出す。
+			userDaoObj.update(user);
+
 		} catch (IllegalStateException e) {
 			error = "データベースに接続できませんでした。";
 			cmd = "user";

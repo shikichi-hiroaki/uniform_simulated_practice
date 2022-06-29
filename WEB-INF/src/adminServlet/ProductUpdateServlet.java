@@ -17,22 +17,21 @@ import dao.ProductDAO;
 
 public class ProductUpdateServlet extends HttpServlet {
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	throws ServletException, IOException {
 
-		String error = "";
-		String cmd = "";
-		String strPrice = "";
+		String error = null;
 
 		try {
-			// 文字コードの設定をする。
+			//　文字コードの設定をする。
 			request.setCharacterEncoding("UTF-8");
 
 			String FilePath = getServletContext().getRealPath("image");
 			String imageName = "no_image.jpg";
-			int maxBytes = 1024 * 1024;
+			int maxBytes  = 1024*1024;
 			MultipartRequest multireq = new MultipartRequest(request, FilePath, maxBytes, "MS932");
 
-			// 更新情報に関するパラメータを取得する。
+			//　更新情報に関するパラメータを取得する。
 			int product_id = Integer.parseInt(multireq.getParameter("product_id"));
 			String product_name = multireq.getParameter("product_name");
 			int price = Integer.parseInt(multireq.getParameter("price"));
@@ -42,30 +41,12 @@ public class ProductUpdateServlet extends HttpServlet {
 				imageName = multireq.getFile("image").getName();
 			}
 
-			// � 取得したパラメータの各エラーチェックをおこなう
-			// 全データの空白チェック（データが入力されているかどうか）
 			if (product_name.equals("")) {
-				error = "商品名が入力されていないため、商品情報の更新が行えませんでした。";
-				cmd = "admin";
+				error = "商品名を入力してください。";
 				return;
 			}
 
-			if (strPrice.equals("")) {
-				error = "価格が未入力のため、商品情報の更新は行えませんでした。";
-				cmd = "admin";
-				return;
-			}
-
-			try {
-				// 価格値チェック（整数かどうか）
-				price = Integer.parseInt(strPrice);
-			} catch (NumberFormatException e) {
-				error = "価格の値が整数ではないため、商品情報の更新は行えませんでした。。";
-				cmd = "admin";
-				return;
-			}
-
-			// 受け取ったデータをProductインスタンスにセットする。
+			//　受け取ったデータをProductインスタンスにセットする。
 			Product product = new Product();
 			product.setProduct_id(product_id);
 			product.setProduct_name(product_name);
@@ -74,22 +55,24 @@ public class ProductUpdateServlet extends HttpServlet {
 			product.setImage(imageName);
 			product.setOn_sale(on_sale);
 
-			// 商品情報を更新する。
+			//　商品情報を更新する。
 			ProductDAO productDaoObj = new ProductDAO();
 			productDaoObj.update(product);
 
+		} catch (NumberFormatException e) {
+			error = "価格もしくは金額には数値を入力してください。";
 		} catch (IllegalStateException e) {
-			error = "DBに接続できませんでした。";
-			cmd = "admin";
+			error = "データベースに接続エラーの為、更新処理を行えませんでした。。";
 		} finally {
-			if (error.equals("")) {
+			if (error == null) {
 				request.getRequestDispatcher("/adminProductList").forward(request, response);
 			} else {
-				request.setAttribute("error",error);
-				request.setAttribute("cmd",cmd);
+				request.setAttribute("cmd", "admin");
+				request.setAttribute("error", error);
 				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
 			}
 		}
-	}
-}
 
+	}
+
+}

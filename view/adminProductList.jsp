@@ -30,7 +30,7 @@
 	%>
 
 	<p align="center">
-		<a href="<%=request.getContextPath()%>/adminProductDetail?name=<%=products.getProduct_id()%>"><%=products.getProduct_name()%></a>
+		<a href="<%=request.getContextPath()%>/adminProductDetail?product_id=<%=products.getProduct_id()%>"><%=products.getProduct_name()%></a>
 	</p>
 
 	<%

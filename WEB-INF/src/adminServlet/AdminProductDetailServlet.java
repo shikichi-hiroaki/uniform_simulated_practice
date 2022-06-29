@@ -20,6 +20,7 @@ public class AdminProductDetailServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String error = "";
+		String change = "";
 		String cmd = "";
 
 		try {
@@ -27,8 +28,8 @@ public class AdminProductDetailServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 
 			// リクエストスコープで受け取った商品IDを取得する。
-			int product_id = Integer.parseInt(request.getParameter("name"));
-			cmd = request.getParameter("cmd");
+			int product_id = Integer.parseInt(request.getParameter("product_id"));
+			change = request.getParameter("change");
 
 			// 受け取った商品IDを持つ商品を取得する。
 			ProductDAO productDaoObj = new ProductDAO();
@@ -51,15 +52,15 @@ public class AdminProductDetailServlet extends HttpServlet {
 			// 取得した商品情報をリクエストスコープに登録する。
 			request.setAttribute("product", product);
 
-		}  catch (IllegalStateException e) {
+		} catch (IllegalStateException e) {
 			error = "DB接続エラー";
 			cmd = "admin";
 		} finally {
 			if (error.equals("")) {
-				if (cmd != null) {
-					request.getRequestDispatcher("view/productUpdate.jsp").forward(request, response);
+				if (change != null) {
+					request.getRequestDispatcher("/view/productUpdate.jsp").forward(request, response);
 				} else {
-					request.getRequestDispatcher("view/adminProductDetail.jsp").forward(request, response);
+					request.getRequestDispatcher("/view/adminProductDetail.jsp").forward(request, response);
 				}
 			} else {
 				request.setAttribute("error", error);

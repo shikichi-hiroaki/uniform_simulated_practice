@@ -61,7 +61,7 @@ if (product == null) {
 				</tr>
 				<tr>
 					<td width="220" align="center"><a
-						href="<%=request.getContextPath()%>/adminProductDetail?cmd=update&product_id=<%= product.getProduct_id() %>">商品更新</a></td>
+						href="<%=request.getContextPath()%>/adminProductDetail?change=update&product_id=<%= product.getProduct_id() %>">商品更新</a></td>
 				</tr>
 			</table>
 		</div>

@@ -98,7 +98,14 @@ public class UserInsertServlet extends HttpServlet {
 
 		} finally {
 
+			if(error.equals("")) {
 			request.getRequestDispatcher("/view/userProductList.jsp").forward(request, response);
+
+			}else {
+				request.setAttribute("error", error);
+				request.setAttribute("cmd", cmd);
+				request.getRequestDispatcher("/view/error.jsp").forward(request, response);
+			}
 
 		}
 	}

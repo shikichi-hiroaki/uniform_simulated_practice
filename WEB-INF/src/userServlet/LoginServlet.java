@@ -31,20 +31,19 @@ public class LoginServlet extends HttpServlet {
 			int authority = user.getAuthority();
 
 			// ユーザー情報のチェック
-			if (user.getMail_adress() == null) {
+			if (mail_adress == null) {
 				error = "メールアドレスを入力してください。";
 				cmd = "user";
 				return;
 			}
-			if (user.getPassword() == null) {
+			if (password == null) {
 				error = "パスワードを入力してください。";
 				cmd = "user";
 				return;
 			}
 
-			// パスワードまたはメールアドレスが違う場合
-			if (!(user.getMail_adress().equals(user.getMail_adress())) || !(user.getPassword().equals(user.getPassword()))) {
-				error = "メールアドレスまたはパスワードが違います。";
+			if(user.getMail_adress()==null) {
+				error = "パスワードが違います。";
 				cmd = "user";
 				return;
 			}
