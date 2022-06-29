@@ -1,0 +1,7 @@
+body {
+    text-align: center;
+    background: linear-gradient(180deg, #006600 0%, #006600 15%, #fff 15%,  #fff 100%);
+	font-size     : 17pt;
+	font-family: "明朝体", serif;
+	}
+	h1 { color : white; }
